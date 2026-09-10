@@ -56,7 +56,7 @@
   <main class="container">
     <div class="tool-stage">
 
-      <!-- 黄色メーター（60秒で1周） -->
+      <!-- 黄色メーター -->
       <div class="meter-wrap">
         <svg class="meter-svg" viewBox="0 0 200 200">
           <circle class="meter-bg-circle" cx="100" cy="100" r="88"/>
@@ -64,19 +64,27 @@
         </svg>
         <div class="meter-center">
           <span class="meter-status">STOPWATCH</span>
+          <!-- 重なりを解消した最適サイズ -->
           <span class="meter-time" id="swDisplay">00:00.00</span>
         </div>
       </div>
 
-      <!-- アクションボタン（ラップ計測対応） -->
+      <!-- 操作ボタン -->
       <div class="action-btns">
         <button class="btn-ctrl btn-primary" id="swStartBtn">Start</button>
         <button class="btn-ctrl" id="swLapBtn" disabled>Lap</button>
         <button class="btn-ctrl" id="swResetBtn">Reset</button>
       </div>
 
-      <!-- ラップタイム履歴 -->
-      <div class="lap-container" id="lapList" style="display: none;"></div>
+      <!-- 区間タイム ＆ 累計タイムのラップ一覧 -->
+      <div class="lap-wrapper" id="lapWrapper">
+        <div class="lap-header">
+          <span>LAP</span>
+          <span>SPLIT (区間)</span>
+          <span>TOTAL (累計)</span>
+        </div>
+        <div class="lap-list" id="lapList"></div>
+      </div>
 
     </div>
   </main>
