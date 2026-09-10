@@ -34,28 +34,62 @@ function updatePortalClock() {
 updatePortalClock();
 setInterval(updatePortalClock, 1000);
 
-// ─── 横長時計の背景カスタマイズ（画像 ＆ 背景色） ───
+// ─── 背景カスタマイズ（画像・ぼかし切替・ドラッグ位置調整・ページ背景色） ───
 const portalClockBanner = document.getElementById('portalClockBanner');
 const portalBgInput = document.getElementById('portalBgInput');
 const btnPortalUpload = document.getElementById('btnPortalUpload');
+const btnPortalBlur = document.getElementById('btnPortalBlur');
+const btnPortalPos = document.getElementById('btnPortalPos');
 const portalColorPicker = document.getElementById('portalColorPicker');
 const btnPortalColor = document.getElementById('btnPortalColor');
 const btnPortalReset = document.getElementById('btnPortalReset');
 
 if (portalClockBanner) {
-  // 保存された背景の読み込み
+  // 状態保持
+  let isBlur = localStorage.getItem('portal_clock_blur') !== 'false'; // デフォルト true
+  let bgPosX = parseFloat(localStorage.getItem('portal_clock_pos_x')) || 50; // デフォルト 50%
+  let bgPosY = parseFloat(localStorage.getItem('portal_clock_pos_y')) || 50; // デフォルト 50%
+  let isPositioningMode = false;
+
+  // 画像コントロールボタンの表示制御
+  function updateBgControlsVisibility(hasImage) {
+    if (btnPortalBlur) btnPortalBlur.style.display = hasImage ? 'inline-flex' : 'none';
+    if (btnPortalPos) btnPortalPos.style.display = hasImage ? 'inline-flex' : 'none';
+  }
+
+  // 位置の適用
+  function applyBgPosition() {
+    portalClockBanner.style.backgroundPosition = `${bgPosX}% ${bgPosY}%`;
+  }
+
+  // ぼかしの適用
+  function applyBlurState() {
+    portalClockBanner.classList.toggle('no-blur', !isBlur);
+    if (btnPortalBlur) {
+      btnPortalBlur.textContent = isBlur ? '✨ ぼかし:ON' : '✨ ぼかし:OFF';
+    }
+  }
+
+  // 保存データの初期反映
   const savedBgImg = localStorage.getItem('portal_clock_bg_img');
-  const savedBgColor = localStorage.getItem('portal_clock_bg_color');
+  const savedPageBg = localStorage.getItem('custom_page_bg');
 
   if (savedBgImg) {
     portalClockBanner.style.backgroundImage = `url(${savedBgImg})`;
     portalClockBanner.classList.add('has-bg');
-  }
-  if (savedBgColor) {
-    portalClockBanner.style.backgroundColor = savedBgColor;
+    updateBgControlsVisibility(true);
+    applyBlurState();
+    applyBgPosition();
+  } else {
+    updateBgControlsVisibility(false);
   }
 
-  // 画像アップロード
+  if (savedPageBg) {
+    document.documentElement.style.setProperty('--bg', savedPageBg);
+    if (portalColorPicker) portalColorPicker.value = savedPageBg;
+  }
+
+  // 1. 画像アップロード
   if (btnPortalUpload && portalBgInput) {
     btnPortalUpload.addEventListener('click', () => portalBgInput.click());
 
@@ -68,6 +102,9 @@ if (portalClockBanner) {
         const dataUrl = event.target.result;
         portalClockBanner.style.backgroundImage = `url(${dataUrl})`;
         portalClockBanner.classList.add('has-bg');
+        updateBgControlsVisibility(true);
+        applyBlurState();
+        applyBgPosition();
         try {
           localStorage.setItem('portal_clock_bg_img', dataUrl);
         } catch (err) {
@@ -78,26 +115,95 @@ if (portalClockBanner) {
     });
   }
 
-  // 背景色ピッカー
+  // 2. ぼかし ON / OFF 切り替え
+  if (btnPortalBlur) {
+    btnPortalBlur.addEventListener('click', () => {
+      isBlur = !isBlur;
+      localStorage.setItem('portal_clock_blur', isBlur);
+      applyBlurState();
+    });
+  }
+
+  // 3. 画像位置のドラッグ調整モード
+  if (btnPortalPos) {
+    btnPortalPos.addEventListener('click', () => {
+      isPositioningMode = !isPositioningMode;
+      portalClockBanner.classList.toggle('is-positioning', isPositioningMode);
+      btnPortalPos.classList.toggle('active', isPositioningMode);
+    });
+  }
+
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let startPosX = 50, startPosY = 50;
+
+  portalClockBanner.addEventListener('pointerdown', (e) => {
+    if (!isPositioningMode || !portalClockBanner.classList.contains('has-bg')) return;
+    isDragging = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    startPosX = bgPosX;
+    startPosY = bgPosY;
+    portalClockBanner.setPointerCapture(e.pointerId);
+  });
+
+  portalClockBanner.addEventListener('pointermove', (e) => {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    // 移動感度を計算
+    bgPosX = Math.max(0, Math.min(100, startPosX - (dx / portalClockBanner.clientWidth) * 100));
+    bgPosY = Math.max(0, Math.min(100, startPosY - (dy / portalClockBanner.clientHeight) * 100));
+
+    applyBgPosition();
+  });
+
+  function stopDrag(e) {
+    if (isDragging) {
+      isDragging = false;
+      localStorage.setItem('portal_clock_pos_x', bgPosX);
+      localStorage.setItem('portal_clock_pos_y', bgPosY);
+      try { portalClockBanner.releasePointerCapture(e.pointerId); } catch(err){}
+    }
+  }
+
+  portalClockBanner.addEventListener('pointerup', stopDrag);
+  portalClockBanner.addEventListener('pointercancel', stopDrag);
+
+  // 4. ページ全体の背景色変更
   if (btnPortalColor && portalColorPicker) {
     btnPortalColor.addEventListener('click', () => portalColorPicker.click());
 
     portalColorPicker.addEventListener('input', (e) => {
       const color = e.target.value;
-      portalClockBanner.style.backgroundColor = color;
-      localStorage.setItem('portal_clock_bg_color', color);
+      document.documentElement.style.setProperty('--bg', color);
+      localStorage.setItem('custom_page_bg', color);
     });
   }
 
-  // リセット
+  // 5. リセット
   if (btnPortalReset) {
     btnPortalReset.addEventListener('click', () => {
       localStorage.removeItem('portal_clock_bg_img');
-      localStorage.removeItem('portal_clock_bg_color');
+      localStorage.removeItem('custom_page_bg');
+      localStorage.removeItem('portal_clock_blur');
+      localStorage.removeItem('portal_clock_pos_x');
+      localStorage.removeItem('portal_clock_pos_y');
+
+      isBlur = true;
+      bgPosX = 50;
+      bgPosY = 50;
+      isPositioningMode = false;
+      portalClockBanner.classList.remove('is-positioning');
+      if (btnPortalPos) btnPortalPos.classList.remove('active');
+
       portalClockBanner.style.backgroundImage = 'none';
-      portalClockBanner.style.backgroundColor = 'var(--card-bg)';
       portalClockBanner.classList.remove('has-bg');
+      updateBgControlsVisibility(false);
       if (portalBgInput) portalBgInput.value = '';
+
+      document.documentElement.style.removeProperty('--bg');
     });
   }
 }
