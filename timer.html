@@ -56,14 +56,23 @@
   <main class="container">
     <div class="tool-stage">
 
-      <!-- プリセット選択ボタン -->
-      <div class="preset-group">
-        <button class="preset-btn" data-time="60">1分</button>
-        <button class="preset-btn" data-time="180">3分</button>
-        <button class="preset-btn" data-time="300">5分</button>
-        <button class="preset-btn" data-time="600">10分</button>
-        <button class="preset-btn" data-time="900">15分</button>
-        <button class="preset-btn" data-time="1800">30分</button>
+      <!-- 自由な時間設定入力スロット -->
+      <div class="custom-time-setter" id="customSetter">
+        <div class="time-input-slot">
+          <input type="number" id="inputMin" class="time-num-input" min="0" max="999" value="05">
+          <span class="time-unit-label">分</span>
+        </div>
+        <span>:</span>
+        <div class="time-input-slot">
+          <input type="number" id="inputSec" class="time-num-input" min="0" max="59" value="00">
+          <span class="time-unit-label">秒</span>
+        </div>
+        <div style="display: flex; gap: 4px; margin-left: 8px;">
+          <button class="btn-quick-adjust" data-add="60">+1m</button>
+          <button class="btn-quick-adjust" data-add="300">+5m</button>
+          <button class="btn-quick-adjust" data-add="600">+10m</button>
+          <button class="btn-quick-adjust" id="btnClearTime">Clear</button>
+        </div>
       </div>
 
       <!-- 円形プログレスメーター -->
