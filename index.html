@@ -52,6 +52,7 @@
     </button>
   </header>
 
+<!-- サブナビゲーション -->
   <div class="sub-nav-wrapper">
     <div class="sub-nav">
       <button class="sub-link" data-tab="all">All</button>
@@ -59,11 +60,37 @@
       <button class="sub-link" data-tab="custom">Custom</button>
     </div>
 
-    <div class="sub-mini-clock">
-      <span class="sub-mini-clock-dot"></span>
-      <span id="miniClock">00:00:00 JST</span>
+    <!-- ✦ 新設：横長ワイド時計ウィジェット（背景画像＆色変更対応） ✦ -->
+    <div class="portal-clock-banner" id="portalClockBanner">
+      <div class="banner-overlay"></div>
+
+      <!-- 背景画像＆色カスタマイズ操作ツール -->
+      <div class="banner-toolbar">
+        <input type="file" id="portalBgInput" accept="image/*" style="display: none;">
+        <button class="banner-btn" id="btnPortalUpload" title="好きな背景画像を設定">🖼 画像</button>
+
+        <input type="color" id="portalColorPicker" value="#121214" style="display: none;">
+        <button class="banner-btn" id="btnPortalColor" title="好きな背景色に変更">🎨 色</button>
+
+        <button class="banner-btn" id="btnPortalReset" title="初期背景に戻す">✕</button>
+      </div>
+
+      <div class="banner-content">
+        <!-- 左：年月日・曜日 -->
+        <div class="banner-date-area">
+          <div class="banner-date-main" id="portalDateMain">----年--月--日 (--)</div>
+          <div class="banner-sub-text" id="portalDateSub">----.--.-- ---</div>
+        </div>
+
+        <!-- 右：横長デジタル時計 -->
+        <div class="banner-time-area">
+          <span class="banner-time-main" id="portalTimeMain">00:00</span>
+          <span class="banner-time-sec" id="portalTimeSec">:00</span>
+          <span class="banner-time-zone">JST</span>
+        </div>
+      </div>
     </div>
-    
+
     <div class="custom-toolbar" id="customToolbar">
       <span>✦ ドラッグ＆ドロップで配置を変更できます</span>
       <button class="reset-btn" id="resetOrderBtn">配置をリセット</button>
