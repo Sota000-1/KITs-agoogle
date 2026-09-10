@@ -1,0 +1,304 @@
+/* ─── 時計ツール専用スタイル ─── */
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 180px);
+  padding: 20px 0 40px;
+  gap: 32px;
+}
+
+/* コントロールバー（切替スイッチなど） */
+.clock-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* アナログ/デジタル トグルスイッチ */
+.mode-switch {
+  display: inline-flex;
+  background: var(--card-bg);
+  border: 1px solid var(--sharp-line);
+  padding: 3px;
+  border-radius: 9999px;
+}
+
+.mode-btn {
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.84rem;
+  font-weight: 400;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+  background: var(--sharp-active);
+  color: var(--bg);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.clock-option-btn {
+  background: none;
+  border: 1px solid var(--sharp-line);
+  color: var(--text-sub);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.clock-option-btn:hover, .clock-option-btn.active {
+  color: var(--text-main);
+  border-color: var(--sharp-active);
+}
+
+/* ─── カレンダー（年月日・曜日）表示 ─── */
+.date-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.date-main {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+}
+
+.date-main .weekday {
+  margin-left: 8px;
+  color: var(--sharp-line-bright);
+}
+
+.date-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  color: var(--text-sub);
+  letter-spacing: 0.12em;
+}
+
+/* ─── デジタル時計 ─── */
+.digital-clock-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.digital-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(3.2rem, 10vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: baseline;
+}
+
+.digital-seconds {
+  font-size: clamp(1.6rem, 5vw, 3.8rem);
+  color: var(--sharp-line-bright);
+  margin-left: 8px;
+}
+
+.digital-millis {
+  font-size: clamp(0.9rem, 2.5vw, 1.8rem);
+  color: var(--text-sub);
+  margin-left: 6px;
+  width: 3ch;
+  text-align: left;
+}
+
+.time-period {
+  font-size: clamp(1rem, 2vw, 1.8rem);
+  color: var(--text-sub);
+  margin-right: 12px;
+  font-weight: 400;
+}
+
+/* ─── アナログ時計 ─── */
+.analog-clock-wrap {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.analog-clock {
+  width: clamp(280px, 60vw, 420px);
+  height: clamp(280px, 60vw, 420px);
+  background: var(--card-bg);
+  border: 1px solid var(--sharp-line);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: var(--icon-shadow);
+  transition: all 0.3s ease;
+}
+
+/* 十字線アクセント */
+.analog-clock::before, .analog-clock::after {
+  content: '';
+  position: absolute;
+  background: var(--sharp-line);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.analog-clock::before {
+  top: 50%; left: 15px; right: 15px; height: 1px;
+}
+.analog-clock::after {
+  left: 50%; top: 15px; bottom: 15px; width: 1px;
+}
+
+/* 目盛り */
+.clock-face {
+  position: absolute;
+  inset: 0;
+}
+
+.dial-mark {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.dial-mark::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 10px;
+  background: var(--sharp-line);
+}
+
+.dial-mark.major::before {
+  width: 3px;
+  height: 16px;
+  background: var(--sharp-line-bright);
+}
+
+/* 数字 */
+.dial-num {
+  position: absolute;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--text-sub);
+  transform: translate(-50%, -50%);
+  user-select: none;
+}
+
+/* 針 */
+.hand-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+  border-radius: 2px;
+}
+
+.hour-hand {
+  width: 4px;
+  height: 28%;
+  background: var(--text-main);
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 2;
+}
+
+.min-hand {
+  width: 2.5px;
+  height: 40%;
+  background: var(--text-main);
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 3;
+}
+
+.sec-hand {
+  width: 1.5px;
+  height: 46%;
+  background: #ff5900; /* アクセントオレンジ */
+  transform: translateX(-50%) rotate(0deg);
+  z-index: 4;
+}
+
+/* 秒針の反対側の突き出し */
+.sec-hand::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  height: 20px;
+  background: #ff5900;
+}
+
+/* センターピン */
+.center-cap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #ff5900;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+.center-cap::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: var(--bg);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 全画面モード時 */
+body:fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+body:fullscreen .header,
+body:fullscreen .clock-controls {
+  display: none;
+}
+body:fullscreen .clock-container {
+  min-height: 100vh;
+  justify-content: center;
+}

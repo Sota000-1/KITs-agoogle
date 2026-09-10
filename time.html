@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time | KITs (kits-tools.net)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/clock.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('tools_theme');
+      if (savedTheme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- メインヘッダー -->
+  <header class="header">
+    <button class="menu-btn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
+        <line x1="2" y1="6" x2="22" y2="6"></line>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <line x1="2" y1="18" x2="22" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Top</a>
+      <a href="index.html" class="nav-link active">Tools</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="#" class="nav-link">News</a>
+      <a href="#" class="nav-link">Link</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3.5"></line>
+        <line x1="12" y1="20.5" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="6" y2="6"></line>
+        <line x1="18" y1="18" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3.5" y2="12"></line>
+        <line x1="20.5" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="6" y2="18"></line>
+        <line x1="18" y1="6" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </header>
+
+  <main class="container">
+    <div class="clock-container">
+
+      <!-- 操作バー（アナログ/デジタル切替・オプション） -->
+      <div class="clock-controls">
+        <div class="mode-switch">
+          <button class="mode-btn active" data-mode="digital">Digital</button>
+          <button class="mode-btn" data-mode="analog">Analog</button>
+        </div>
+        <button class="clock-option-btn" id="toggle24h" title="12/24時間表記切り替え">24H</button>
+        <button class="clock-option-btn" id="toggleSweep" title="秒針のスムーズ移動">Smooth</button>
+        <button class="clock-option-btn" id="fullscreenBtn" title="全画面表示">⛶ Full</button>
+      </div>
+
+      <!-- 年月日・曜日 -->
+      <div class="date-display">
+        <div class="date-main" id="dateMain">----年--月--日 (--)</div>
+        <div class="date-sub" id="dateSub">----.--.-- ---</div>
+      </div>
+
+      <!-- デジタル時計盤 -->
+      <div class="digital-clock-wrap" id="digitalWrap">
+        <div class="digital-time">
+          <span class="time-period" id="timePeriod" style="display: none;">AM</span>
+          <span id="hourMin">00:00</span>
+          <span class="digital-seconds" id="seconds">00</span>
+          <span class="digital-millis" id="millis">.00</span>
+        </div>
+      </div>
+
+      <!-- アナログ時計盤 -->
+      <div class="analog-clock-wrap" id="analogWrap">
+        <div class="analog-clock">
+          <div class="clock-face" id="clockDial"></div>
+          <div class="hand-wrapper">
+            <div class="hand hour-hand" id="hourHand"></div>
+            <div class="hand min-hand" id="minHand"></div>
+            <div class="hand sec-hand" id="secHand"></div>
+            <div class="center-cap"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/clock.js"></script>
+</body>
+</html>
