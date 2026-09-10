@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | KITs (kits-tools.net)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('tools_theme');
+      if (savedTheme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="spotlight-grid"></div>
+
+  <header class="header">
+    <button class="menu-btn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
+        <line x1="2" y1="6" x2="22" y2="6"></line>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <line x1="2" y1="18" x2="22" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Top</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="index.html" class="nav-link">Tools</a>
+      <a href="#" class="nav-link">News</a>
+      <a href="#" class="nav-link">Link</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3.5"></line>
+        <line x1="12" y1="20.5" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="6" y2="6"></line>
+        <line x1="18" y1="18" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3.5" y2="12"></line>
+        <line x1="20.5" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="6" y2="18"></line>
+        <line x1="18" y1="6" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </header>
+
+  <main class="container">
+    <div class="hud-bar">
+      <div class="hud-group">
+        <span class="hud-dot"></span>
+        <span>SYS.STATUS: OPERATIONAL</span>
+      </div>
+      <div class="hud-group">
+        <span>VIEWPORT: <span id="viewportDim">000x000</span></span>
+        <span>•</span>
+        <span id="liveClock">00:00:00.000 JST</span>
+      </div>
+    </div>
+
+    <!-- 01: Mission -->
+    <section class="section">
+      <div class="section-header">
+        <h1 class="section-title">Mission</h1>
+        <div class="section-line"></div>
+        <span class="section-tag">01 / PHILOSOPHY</span>
+      </div>
+
+      <p class="hero-lead">
+        電子機器の使用促進と時間の有効活用で、<br>
+        <span class="highlight">青少年の成長と社会の発展を切り拓く。</span>
+      </p>
+      <p class="hero-sub">
+        KITs（kits-tools.net）は、青少年の学習に携わるすべての人に対して、時間の有効活用のための電子機器の使用促進や情報化社会への教育の促進に関する事業を行い、青少年の成長を通じて社会全体の発展に寄与することを目指しています。学校などのフィルタリングや制限環境下でも、レポート作成・数理探究・時間管理といった「真に必要な学びのツール」を誰でも即座に使えるプラットフォームを提供しています。
+      </p>
+    </section>
+
+    <!-- 02: Core Values -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Core Values</h2>
+        <div class="section-line"></div>
+        <span class="section-tag">02 / PILLARS</span>
+      </div>
+
+      <div class="concept-grid">
+        <div class="corner-card tilt-card">
+          <div class="card-meta">
+            <span>PILLAR 01</span>
+            <span>TIME EFFICIENCY</span>
+          </div>
+          <div class="card-title">学習時間の有効活用</div>
+          <p class="card-desc">
+            APA引用作成や文字数集計、縦書き編集など、学術執筆や日々の作業にかかる不要な摩擦を削ぎ落とし、探究そのものに没頭できる時間を生み出します。
+          </p>
+        </div>
+
+        <div class="corner-card tilt-card">
+          <div class="card-meta">
+            <span>PILLAR 02</span>
+            <span>UNRESTRICTED</span>
+          </div>
+          <div class="card-title">制限を超えたアクセス</div>
+          <p class="card-desc">
+            教育現場のネットワーク制限や端末差に左右されず、誰もがブラウザ1つで軽量かつ安全にアクセスできる学習インフラを構築しています。
+          </p>
+        </div>
+
+        <div class="corner-card tilt-card">
+          <div class="card-meta">
+            <span>PILLAR 03</span>
+            <span>DIGITAL LITERACY</span>
+          </div>
+          <div class="card-title">情報化社会の自律</div>
+          <p class="card-desc">
+            単なる消費者としてではなく、テクノロジーの特性を理解して主体的に道具を使いこなす力を青少年とともに育みます。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03: Organization -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Organization</h2>
+        <div class="section-line"></div>
+        <span class="section-tag">03 / PROJECT</span>
+      </div>
+
+      <div class="creator-plate">
+        <span class="cross-mark cross-tl">+</span>
+        <span class="cross-mark cross-tr">+</span>
+        <span class="cross-mark cross-bl">+</span>
+        <span class="cross-mark cross-br">+</span>
+
+        <div class="creator-symbol">
+          <svg viewBox="0 0 100 100">
+            <polygon points="50,14 86,78 14,78" fill="none" class="svg-main-stroke" stroke-width="2"/>
+            <circle cx="50" cy="54" r="16" fill="none" class="svg-muted-stroke" stroke-width="1.5"/>
+            <circle cx="50" cy="54" r="3.5" class="svg-main-fill"/>
+          </svg>
+        </div>
+
+        <div class="creator-details">
+          <span class="creator-tag">STUDENT PROJECT / NPO</span>
+          <h3 class="creator-name">KITs (Kaisei Information Tools)</h3>
+          <p class="creator-bio">
+            中高生の視点から「教育現場に本当に必要な道具」を追求する開発チーム。学習・執筆・数理ツールをゼロから開発し、オープンで持続可能な教育支援活動を展開しています。
+          </p>
+          <div class="creator-links">
+            <a href="https://www.kits-tools.net" target="_blank" class="creator-link">kits-tools.net ↗</a>
+            <a href="https://github.com/Kaisei-Information-Tools" target="_blank" class="creator-link">GitHub ↗</a>
+            <a href="https://forms.gle" target="_blank" class="creator-link">Feedback / 要望 ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04: System Specs -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">System Specs</h2>
+        <div class="section-line"></div>
+        <span class="section-tag">04 / SPECIFICATIONS</span>
+      </div>
+
+      <div class="spec-grid">
+        <div class="spec-item">
+          <span class="spec-key">ARCHITECTURE</span>
+          <span class="spec-val">Vanilla Web Standards / Zero-Dependency（制限回線でも超高速起動）</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">DATA PRIVACY</span>
+          <span class="spec-val">完全クライアントサイド実行（入力データ・文章は外部送信されません）</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">CUSTOM ENGINE</span>
+          <span class="spec-val">LocalStorage によるテーマ同期および並び替え配置の自動保持</span>
+        </div>
+        <div class="spec-item">
+          <span class="spec-key">TYPOGRAPHY</span>
+          <span class="spec-val">Inter, JetBrains Mono, Noto Sans JP</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/about.js"></script>
+</body>
+</html>
