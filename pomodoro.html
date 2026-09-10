@@ -56,10 +56,24 @@
   <main class="container">
     <div class="tool-stage">
 
-      <!-- シャープなカプセル型切り替えスイッチ（修正） -->
+      <!-- カプセル型モード切替スイッチ -->
       <div class="mode-switch">
         <button class="mode-btn active" id="btnModeWork">Focus (25m)</button>
         <button class="mode-btn" id="btnModeBreak">Break (5m)</button>
+      </div>
+
+      <!-- ✦ 好きな時間設定スロット ✦ -->
+      <div class="custom-time-setter" id="pomoSetter">
+        <div class="time-input-slot">
+          <input type="number" id="pomoInputMin" class="time-num-input" min="1" max="999" value="25">
+          <span class="time-unit-label">分</span>
+        </div>
+        <div style="display: flex; gap: 4px; margin-left: 8px;">
+          <button class="btn-quick-adjust" data-add="1">+1m</button>
+          <button class="btn-quick-adjust" data-add="5">+5m</button>
+          <button class="btn-quick-adjust" data-add="10">+10m</button>
+          <button class="btn-quick-adjust" id="btnPresetDefault" title="標準の25m/5mに戻す">標準 (25/5)</button>
+        </div>
       </div>
 
       <!-- プログレスリング -->
