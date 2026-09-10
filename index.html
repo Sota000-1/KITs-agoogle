@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools Hub | KITs (kits-tools.net)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('tools_theme');
+      if (savedTheme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</head>
+<body>
+
+  <header class="header">
+    <button class="menu-btn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
+        <line x1="2" y1="6" x2="22" y2="6"></line>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <line x1="2" y1="18" x2="22" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Top</a>
+      <a href="index.html" class="nav-link active">Tools</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="#" class="nav-link">News</a>
+      <a href="#" class="nav-link">Link</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3.5"></line>
+        <line x1="12" y1="20.5" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="6" y2="6"></line>
+        <line x1="18" y1="18" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3.5" y2="12"></line>
+        <line x1="20.5" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="6" y2="18"></line>
+        <line x1="18" y1="6" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </header>
+
+  <div class="sub-nav-wrapper">
+    <div class="sub-nav">
+      <button class="sub-link" data-tab="all">All</button>
+      <button class="sub-link active" data-tab="category">Category</button>
+      <button class="sub-link" data-tab="custom">Custom</button>
+    </div>
+
+    <div class="sub-mini-clock">
+      <span class="sub-mini-clock-dot"></span>
+      <span id="miniClock">00:00:00 JST</span>
+    </div>
+    
+    <div class="custom-toolbar" id="customToolbar">
+      <span>✦ ドラッグ＆ドロップで配置を変更できます</span>
+      <button class="reset-btn" id="resetOrderBtn">配置をリセット</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- Time -->
+    <section class="section category-section" data-cat="time">
+      <div class="section-header">
+        <h2 class="section-title">Time</h2>
+        <div class="section-line"></div>
+        <span class="section-count">4tools</span>
+      </div>
+
+      <div class="tools-grid" id="grid-time">
+        <!-- 1. Time -->
+        <a href="#time" class="tool-item" data-id="time" data-origin="time">
+          <div class="icon-box">
+            <svg viewBox="70.5 493.5 254 254" fill="none">
+              <line x1="210.389" y1="630.792" x2="153.389" y2="586.792" class="svg-main-stroke" stroke-width="2"/>
+              <line x1="90" y1="621" x2="125" y2="621" class="svg-main-stroke" stroke-width="4"/>
+              <line x1="270" y1="621" x2="305" y2="621" class="svg-main-stroke" stroke-width="4"/>
+              <line x1="197" y1="728" x2="197" y2="693" class="svg-main-stroke" stroke-width="4"/>
+              <line x1="197" y1="548" x2="197" y2="513" class="svg-main-stroke" stroke-width="4"/>
+              <line x1="197.5" y1="638" x2="197.5" y2="542" class="svg-main-stroke"/>
+              <line x1="181.45" y1="631.165" x2="269.45" y2="573.165" class="svg-main-stroke" stroke-width="2"/>
+              <circle cx="197.5" cy="620.5" r="4.5" class="svg-main-fill"/>
+            </svg>
+          </div>
+          <div class="tool-title">Time</div>
+          <div class="tool-desc">現在時刻を表示します。</div>
+        </a>
+
+        <!-- 2. Timer -->
+        <a href="#timer" class="tool-item" data-id="timer" data-origin="time">
+          <div class="icon-box">
+            <svg viewBox="419.5 493.5 254 254" fill="none">
+              <mask id="timer_mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="445" y="522" width="201" height="201">
+                <circle cx="545.5" cy="622.5" r="100" fill="#4AD2D7" stroke="white"/>
+              </mask>
+              <g mask="url(#timer_mask)">
+                <circle cx="545.5" cy="622.5" r="100.5" fill="var(--clock-face)"/>
+                <circle cx="545.5" cy="622.5" r="100" class="svg-muted-stroke"/>
+                <path d="M546.149 618.55L545.597 498.642L648.18 555.559L546.149 618.55Z" fill="#4AD2D7"/>
+                <line x1="425.585" y1="620.195" x2="464.914" y2="620.195" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="627.849" y1="620.195" x2="667.178" y2="620.195" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="546.067" y1="740.183" x2="546.067" y2="700.854" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="546.067" y1="537.919" x2="546.067" y2="498.59" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="528.434" y1="630.337" x2="622.629" y2="571.402" class="svg-main-stroke" stroke-width="2"/>
+                <circle cx="546.382" cy="619.386" r="5.05659" class="svg-main-fill"/>
+              </g>
+            </svg>
+          </div>
+          <div class="tool-title">Timer</div>
+          <div class="tool-desc">時間を計測できます。</div>
+        </a>
+
+        <!-- 3. Pomodoro Timer -->
+        <a href="#pomodoro" class="tool-item" data-id="pomodoro" data-origin="time">
+          <div class="icon-box">
+            <svg viewBox="751.5 493.5 254 254" fill="none">
+              <mask id="pomodoro_mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="777" y="522" width="201" height="201">
+                <circle cx="877.5" cy="622.5" r="100" fill="#D9D9D9" stroke="white"/>
+              </mask>
+              <g mask="url(#pomodoro_mask)">
+                <circle cx="877.5" cy="622.5" r="100" fill="var(--clock-face)" stroke="white"/>
+                <path d="M878.15 618.55L877.599 498.641L980.182 555.558L878.15 618.55Z" fill="#6750A4"/>
+                <path d="M877.979 619.419L663.673 913.617L879.709 255.445L877.979 619.419Z" fill="#FF5900"/>
+                <line x1="757.585" y1="620.195" x2="796.914" y2="620.195" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="959.85" y1="620.195" x2="999.179" y2="620.195" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="878.067" y1="740.182" x2="878.067" y2="700.853" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="878.067" y1="537.919" x2="878.067" y2="498.59" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="860.434" y1="630.336" x2="954.629" y2="571.401" class="svg-main-stroke" stroke-width="2"/>
+                <path d="M889.712 603.547L823.5 694" class="svg-main-stroke" stroke-width="2"/>
+                <circle cx="878.382" cy="619.385" r="5.05659" class="svg-main-fill"/>
+                <circle cx="877.5" cy="622.5" r="100" class="svg-muted-stroke"/>
+                <path d="M871.157 538.145L856.142 529.51L856.171 546.83L871.157 538.145ZM821.786 687.276L822.706 686.091C789.694 660.442 783.832 625.476 793.524 596.081C803.251 566.579 828.579 542.841 857.828 539.659L857.666 538.168L857.503 536.676C826.861 540.01 800.693 564.754 790.675 595.141C780.621 625.635 786.765 661.966 820.866 688.46L821.786 687.276Z" class="svg-main-fill"/>
+              </g>
+              <path d="M943.978 573.02L943.115 555.721L928.565 565.118L943.978 573.02ZM887 537.716L886.927 539.215C904.066 540.049 923.358 548.101 935.503 562.642L936.655 561.681L937.806 560.719C925.049 545.445 904.925 537.087 887.073 536.218L887 537.716Z" class="svg-main-fill"/>
+            </svg>
+          </div>
+          <div class="tool-title">Pomodoro Timer</div>
+          <div class="tool-desc">ポモドーロタイマーです。</div>
+        </a>
+
+        <!-- 4. Stopwatch -->
+        <a href="#stopwatch" class="tool-item" data-id="stopwatch" data-origin="time">
+          <div class="icon-box">
+            <svg viewBox="1077.5 493.5 254 254" fill="none">
+              <path d="M1213.09 555.979C1208.1 560.089 1200.9 560.089 1195.91 555.979L1174.91 538.668C1165.14 530.614 1170.83 514.75 1183.5 514.75H1225.5C1238.17 514.75 1243.86 530.614 1234.09 538.668L1213.09 555.979Z" fill="var(--clock-face)" class="svg-main-stroke" stroke-width="3"/>
+              <mask id="stopwatch_mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1112" y="542" width="185" height="185">
+                <circle cx="1204.5" cy="634.5" r="92" fill="#D9D9D9" stroke="white"/>
+              </mask>
+              <g mask="url(#stopwatch_mask)">
+                <circle cx="1204.5" cy="634.5" r="92" fill="var(--clock-face)" stroke="white"/>
+                <path d="M1204.94 631.664L1007.69 902.444L1206.53 296.663L1204.94 631.664Z" fill="#FEBC2F"/>
+                <line x1="1094.13" y1="632.219" x2="1130.33" y2="632.219" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="1280.29" y1="632.219" x2="1316.49" y2="632.219" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="1204.86" y1="742.814" x2="1204.86" y2="706.616" class="svg-main-stroke" stroke-width="4"/>
+                <line x1="1204.86" y1="556.652" x2="1204.86" y2="520.454" class="svg-main-stroke" stroke-width="4"/>
+                <path d="M1215.74 617.056L1154.8 700.308" class="svg-main-stroke" stroke-width="2"/>
+                <circle cx="1205.31" cy="631.633" r="4.65408" class="svg-main-fill"/>
+                <circle cx="1204.5" cy="634.5" r="92" class="svg-muted-stroke"/>
+                <path d="M1198.66 556.86L1183.57 548.366L1183.76 565.686L1198.66 556.86ZM1153.22 694.12L1154.14 692.935C1124 669.516 1118.49 637.656 1127.15 610.758C1135.84 583.754 1158.75 561.894 1185.34 558.497L1185.15 557.01L1184.96 555.522C1157 559.093 1133.27 581.949 1124.29 609.839C1115.28 637.835 1121.08 671.047 1152.3 695.304L1153.22 694.12Z" class="svg-main-fill"/>
+              </g>
+            </svg>
+          </div>
+          <div class="tool-title">Stopwatch</div>
+          <div class="tool-desc">ストップウォッチです。</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- STEM -->
+    <section class="section category-section" data-cat="stem">
+      <div class="section-header">
+        <h2 class="section-title">STEM</h2>
+        <div class="section-line"></div>
+        <span class="section-count">3tools</span>
+      </div>
+
+      <div class="tools-grid" id="grid-stem">
+        <!-- 1. Calculator -->
+        <a href="#calc" class="tool-item" data-id="calc" data-origin="stem">
+          <div class="icon-box">
+            <svg viewBox="0 0 100 100">
+              <rect x="22" y="16" width="56" height="68" rx="12" fill="none" stroke="#e8a838" stroke-width="2.5"/>
+              <rect x="29" y="25" width="42" height="11" rx="3" fill="#e8a838"/>
+              <circle cx="36" cy="45" r="3.8" class="svg-main-fill"/>
+              <circle cx="50" cy="45" r="3.8" class="svg-main-fill"/>
+              <circle cx="64" cy="45" r="3.8" class="svg-main-fill"/>
+              <circle cx="36" cy="58" r="3.8" class="svg-main-fill"/>
+              <circle cx="50" cy="58" r="3.8" class="svg-main-fill"/>
+              <circle cx="64" cy="58" r="3.8" class="svg-main-fill"/>
+              <circle cx="36" cy="71" r="3.8" fill="#e8a838"/>
+              <circle cx="50" cy="71" r="3.8" fill="#e8a838"/>
+              <circle cx="64" cy="71" r="3.8" fill="#e8a838"/>
+            </svg>
+          </div>
+          <div class="tool-title">Calculator</div>
+          <div class="tool-desc">普通の電卓です。</div>
+        </a>
+
+        <!-- 2. LaTeX -->
+        <a href="#latex" class="tool-item" data-id="latex" data-origin="stem">
+          <div class="icon-box">
+            <svg viewBox="419.5 1005.5 254 254" fill="none">
+              <mask id="latex_mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="453" y="1039" width="188" height="188">
+                <circle cx="547" cy="1133" r="94" fill="#4AD2D7"/>
+              </mask>
+              <g mask="url(#latex_mask)">
+                <circle cx="547" cy="1133" r="93" class="svg-main-stroke" stroke-width="2"/>
+                <path d="M514.188 1143.25L513.75 1157H479.438V1154.31H480.25C481.854 1154.31 483.125 1154.02 484.062 1153.44C485.021 1152.83 485.5 1151.59 485.5 1149.72V1118.59C485.5 1116.72 485.021 1115.49 484.062 1114.91C483.125 1114.3 481.854 1114 480.25 1114H479.438V1111.31H498.062V1114H497.219C495.677 1114 494.417 1114.28 493.438 1114.84C492.458 1115.39 491.969 1116.55 491.969 1118.34V1153.81H504.594C506.406 1153.81 507.75 1153.23 508.625 1152.06C509.5 1150.9 510.031 1149.55 510.219 1148.03L510.844 1143.25H514.188Z" class="svg-main-fill"/>
+                <path d="M551 1114.5H544.781V1149.72C544.781 1151.61 545.26 1152.85 546.219 1153.44C547.177 1154.02 548.448 1154.31 550.031 1154.31H551.5V1157H531.594V1154.31H533.062C534.646 1154.31 535.917 1154.04 536.875 1153.5C537.833 1152.96 538.312 1151.8 538.312 1150.03V1114.5H532.188C530.396 1114.5 529.115 1114.99 528.344 1115.97C527.594 1116.95 527.125 1118.21 526.938 1119.75L526.594 1122.5H523.281L523.594 1111.31H559.625L559.938 1122.5H556.625L556.312 1119.75C556.125 1118.21 555.646 1116.95 554.875 1115.97C554.104 1114.99 552.812 1114.5 551 1114.5Z" class="svg-main-fill"/>
+                <path d="M580.406 1144.66H564.969V1163.81H577.312C579.229 1163.81 580.667 1163.32 581.625 1162.34C582.583 1161.36 583.177 1160.1 583.406 1158.56L583.844 1155.81H587.188L586.75 1167H552.438V1164.31H553.25C554.833 1164.31 556.104 1164.04 557.062 1163.5C558.021 1162.96 558.5 1161.8 558.5 1160.03V1128.59C558.5 1126.72 558.021 1125.49 557.062 1124.91C556.125 1124.3 554.854 1124 553.25 1124H552.438V1121.31H584.688L585 1132.5H581.688L581.375 1129.75C581.188 1128.21 580.656 1126.95 579.781 1125.97C578.906 1124.99 577.552 1124.5 575.719 1124.5H564.969V1141.53H580.406V1144.66Z" class="svg-main-fill"/>
+                <path d="M609.812 1115.84C609.812 1115.07 609.479 1114.57 608.812 1114.34C608.146 1114.11 607.333 1114 606.375 1114H606.188V1111.31H620.188V1114H619.625C618.292 1114 617.177 1114.36 616.281 1115.09C615.385 1115.82 614.385 1116.99 613.281 1118.59L604 1131.97L615.781 1150.91C616.719 1152.16 617.604 1153.04 618.438 1153.56C619.271 1154.06 620.094 1154.31 620.906 1154.31H621.719V1157H604.438V1154.31H604.781C607.323 1154.31 608.594 1153.6 608.594 1152.19C608.594 1151.62 608.417 1151.04 608.062 1150.44C607.729 1149.81 607.208 1148.93 606.5 1147.78L600.156 1137.59L593.062 1148.09C592.729 1148.59 592.365 1149.26 591.969 1150.09C591.594 1150.93 591.406 1151.67 591.406 1152.31C591.406 1153.65 592.792 1154.31 595.562 1154.31H595.75V1157H580.5V1154.31H580.906C582.49 1154.31 583.719 1153.96 584.594 1153.25C585.49 1152.54 586.479 1151.41 587.562 1149.84L598.25 1134.53L587.688 1117.38C586.917 1116.15 586.042 1115.28 585.062 1114.78C584.104 1114.26 583.146 1114 582.188 1114H581.344V1111.31H598.688V1114H598.5C596.062 1114 594.844 1114.61 594.844 1115.84C594.844 1116.34 594.948 1116.88 595.156 1117.44C595.385 1117.98 595.792 1118.71 596.375 1119.62L602.156 1128.97L608.219 1119.75C608.698 1119.02 609.083 1118.33 609.375 1117.69C609.667 1117.04 609.812 1116.43 609.812 1115.84Z" class="svg-main-fill"/>
+                <path d="M519.244 1145.65L517.242 1140.06H504.107L502.203 1145.31C501.894 1146.14 501.739 1146.86 501.739 1147.46C501.739 1149.09 502.846 1149.9 505.06 1149.9H506.207V1152H494V1149.9H494.952C496.01 1149.9 496.767 1149.62 497.223 1149.05C497.695 1148.46 498.207 1147.44 498.761 1145.99L509.845 1116.31H513.751L525.055 1147.24C525.429 1148.25 525.86 1148.95 526.349 1149.34C526.837 1149.71 527.586 1149.9 528.595 1149.9H529.254V1152H515.509V1149.9H516.656C518.658 1149.9 519.659 1149.1 519.659 1147.51C519.659 1147.23 519.618 1146.95 519.537 1146.65C519.472 1146.36 519.374 1146.03 519.244 1145.65ZM505.06 1137.55H516.339L513.238 1128.81C512.717 1127.33 512.237 1125.94 511.798 1124.66C511.375 1123.35 511.025 1122.1 510.748 1120.9C510.553 1121.92 510.235 1123.11 509.796 1124.46C509.373 1125.81 508.925 1127.11 508.453 1128.34L505.06 1137.55Z" class="svg-main-fill"/>
+              </g>
+            </svg>
+          </div>
+          <div class="tool-title">LaTeX</div>
+          <div class="tool-desc">レポート作成に使えます。</div>
+        </a>
+
+        <!-- 3. Unit Conversion -->
+        <a href="#unit" class="tool-item" data-id="unit" data-origin="stem">
+          <div class="icon-box">
+            <svg viewBox="748.5 1005.5 254 254" fill="none">
+              <ellipse cx="842" cy="1103.5" rx="33" ry="29.5" class="svg-main-fill"/>
+              <rect x="842" y="1074" width="100" height="59" class="svg-main-fill"/>
+              <path d="M988 1104L941.5 1149.9V1058.1L988 1104Z" class="svg-main-fill"/>
+
+              <ellipse cx="908.5" cy="1162.5" rx="33.5" ry="29.5" fill="#FF5900"/>
+              <rect x="812" y="1133" width="100" height="59" fill="#FF5900"/>
+              <path d="M766 1163L812.5 1117.1V1208.9L766 1163Z" fill="#FF5900"/>
+
+              <line x1="845" y1="1104" x2="939" y2="1104" stroke="var(--icon-bg)" stroke-width="6" stroke-linecap="round"/>
+              <line x1="812" y1="1164" x2="906" y2="1164" stroke="var(--icon-bg)" stroke-width="6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="tool-title">Unit Conversion</div>
+          <div class="tool-desc">様々な単位を変換できます。</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Report -->
+    <section class="section category-section" data-cat="report">
+      <div class="section-header">
+        <h2 class="section-title">Report</h2>
+        <div class="section-line"></div>
+        <span class="section-count">3tools</span>
+      </div>
+
+      <div class="tools-grid" id="grid-report">
+        <!-- 1. APA Style Editor -->
+        <a href="#apa" class="tool-item" data-id="apa" data-origin="report">
+          <div class="icon-box">
+            <svg viewBox="0 0 100 100">
+              <path d="M 30 16 L 56 16 L 78 38 L 78 76 A 10 10 0 0 1 68 86 L 30 86 A 10 10 0 0 1 20 76 L 20 26 A 10 10 0 0 1 30 16 Z" 
+                    fill="none" stroke="#a855f7" stroke-width="3.2" stroke-linejoin="round"/>
+              <path d="M 56 16 L 78 38 L 56 38 Z" fill="#a855f7"/>
+              <rect x="17" y="47" width="66" height="21" rx="10.5" fill="#a855f7"/>
+              <text x="50" y="62.5" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="1">APA</text>
+            </svg>
+          </div>
+          <div class="tool-title">APA Style Editor</div>
+          <div class="tool-desc">論文形式を自動整形します。</div>
+        </a>
+
+        <!-- 2. Tategaki-Editor -->
+        <a href="#tategaki" class="tool-item" data-id="tategaki" data-origin="report">
+          <div class="icon-box">
+            <svg viewBox="0 0 100 100">
+              <path d="M 30 16 L 56 16 L 78 38 L 78 76 A 10 10 0 0 1 68 86 L 30 86 A 10 10 0 0 1 20 76 L 20 26 A 10 10 0 0 1 30 16 Z" 
+                    fill="none" stroke="#22c55e" stroke-width="3.2" stroke-linejoin="round"/>
+              <path d="M 56 16 L 78 38 L 56 38 Z" fill="#22c55e"/>
+              <line x1="62" y1="45" x2="62" y2="76" stroke="#22c55e" stroke-width="3.5" stroke-linecap="square"/>
+              <line x1="48" y1="45" x2="48" y2="76" stroke="#22c55e" stroke-width="3.5" stroke-linecap="square"/>
+              <line x1="34" y1="45" x2="34" y2="62" stroke="#22c55e" stroke-width="3.5" stroke-linecap="square"/>
+            </svg>
+          </div>
+          <div class="tool-title">Tategaki-Editor</div>
+          <div class="tool-desc">文章を縦で書けます。</div>
+        </a>
+
+        <!-- 3. Text Counter -->
+        <a href="#counter" class="tool-item" data-id="counter" data-origin="report">
+          <div class="icon-box">
+            <svg viewBox="748.5 1527.5 254 254" fill="none">
+              <mask id="tc_mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="792" y="1547" width="111" height="217">
+                <rect x="792.91" y="1547.15" width="109.406" height="216.847" fill="#D9D9D9"/>
+              </mask>
+              <g mask="url(#tc_mask0)">
+                <rect x="795.91" y="1550.15" width="163.292" height="210.847" rx="34" stroke="#0088FF" stroke-width="6"/>
+              </g>
+              <mask id="tc_mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="868" y="1604" width="104" height="160">
+                <rect x="868.919" y="1604.91" width="102.496" height="159.094" fill="#D9D9D9"/>
+              </mask>
+              <g mask="url(#tc_mask1)">
+                <rect x="795.91" y="1550.15" width="163.292" height="210.847" rx="36" stroke="#0088FF" stroke-width="6"/>
+              </g>
+
+              <rect x="808.5" y="1655.5" width="139" height="42" rx="11.5" fill="#0088FF" stroke="#0088FF" stroke-width="7"/>
+
+              <path d="M902.052 1610.03C898.599 1610.07 895.791 1607.41 895.826 1604.14L896.379 1552.58C896.434 1547.42 903.039 1544.87 906.901 1548.52L960.838 1599.55C964.7 1603.21 962.003 1609.46 956.542 1609.51L902.052 1610.03Z" fill="#0088FF"/>
+
+              <mask id="tc_mask2" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="805" y="1652" width="146" height="49">
+                <rect x="808.5" y="1655.5" width="139" height="42" rx="11.5" fill="#6750A4" stroke="#6750A4" stroke-width="7"/>
+              </mask>
+              <g mask="url(#tc_mask2)">
+                <path d="M852.41 1688.82H847.078V1698H837.964V1688.82H819.054V1682.31L838.46 1653.73H847.078V1681.57H852.41V1688.82ZM837.964 1674.07C837.964 1673.37 837.964 1672.54 837.964 1671.59C838.005 1670.6 838.047 1669.62 838.088 1668.67C838.129 1667.68 838.171 1666.81 838.212 1666.07C838.253 1665.28 838.295 1664.75 838.336 1664.46H838.088C837.716 1665.28 837.323 1666.09 836.91 1666.88C836.497 1667.66 836.001 1668.47 835.422 1669.29L827.3 1681.57H837.964V1674.07ZM892.427 1672.64C892.427 1675.16 892.241 1677.68 891.869 1680.21C891.497 1682.69 890.836 1685.04 889.885 1687.27C888.976 1689.46 887.674 1691.43 885.979 1693.16C884.326 1694.86 882.197 1696.2 879.593 1697.19C877.031 1698.14 873.91 1698.62 870.231 1698.62C869.363 1698.62 868.351 1698.58 867.193 1698.5C866.036 1698.45 865.065 1698.35 864.279 1698.19V1690.68C865.106 1690.85 865.974 1690.99 866.883 1691.12C867.793 1691.24 868.702 1691.3 869.611 1691.3C872.381 1691.3 874.654 1690.97 876.431 1690.31C878.25 1689.65 879.676 1688.7 880.709 1687.46C881.743 1686.22 882.487 1684.75 882.941 1683.06C883.437 1681.36 883.727 1679.5 883.809 1677.48H883.437C882.859 1678.43 882.156 1679.3 881.329 1680.08C880.544 1680.87 879.531 1681.49 878.291 1681.94C877.093 1682.4 875.543 1682.62 873.641 1682.62C871.12 1682.62 868.929 1682.09 867.069 1681.01C865.209 1679.9 863.763 1678.3 862.729 1676.24C861.696 1674.13 861.179 1671.59 861.179 1668.61C861.179 1665.39 861.779 1662.64 862.977 1660.37C864.217 1658.05 865.974 1656.29 868.247 1655.1C870.521 1653.86 873.187 1653.24 876.245 1653.24C878.519 1653.24 880.627 1653.63 882.569 1654.41C884.553 1655.2 886.269 1656.4 887.715 1658.01C889.203 1659.58 890.361 1661.59 891.187 1664.02C892.014 1666.46 892.427 1669.34 892.427 1672.64ZM876.431 1660.74C874.613 1660.74 873.125 1661.36 871.967 1662.6C870.81 1663.84 870.231 1665.8 870.231 1668.49C870.231 1670.64 870.727 1672.33 871.719 1673.57C872.711 1674.81 874.22 1675.43 876.245 1675.43C877.651 1675.43 878.849 1675.12 879.841 1674.5C880.875 1673.88 881.681 1673.12 882.259 1672.21C882.838 1671.26 883.127 1670.29 883.127 1669.29C883.127 1668.26 882.983 1667.25 882.693 1666.26C882.404 1665.22 881.97 1664.29 881.391 1663.47C880.854 1662.64 880.172 1661.98 879.345 1661.48C878.519 1660.99 877.547 1660.74 876.431 1660.74Z" fill="white"/>
+                <path d="M900.17 1658.21C900.17 1655.65 900.356 1653.13 900.728 1650.65C901.1 1648.17 901.741 1645.83 902.65 1643.64C903.601 1641.41 904.903 1639.45 906.556 1637.75C908.251 1636.02 910.379 1634.67 912.942 1633.72C915.546 1632.73 918.687 1632.24 922.366 1632.24C923.234 1632.24 924.247 1632.28 925.404 1632.36C926.561 1632.4 927.533 1632.5 928.318 1632.67V1640.17C927.533 1639.97 926.665 1639.82 925.714 1639.74C924.805 1639.61 923.895 1639.55 922.986 1639.55C920.217 1639.55 917.923 1639.88 916.104 1640.54C914.327 1641.21 912.921 1642.16 911.888 1643.4C910.855 1644.64 910.09 1646.1 909.594 1647.8C909.139 1649.45 908.871 1651.31 908.788 1653.38H909.16C909.739 1652.39 910.441 1651.52 911.268 1650.77C912.136 1649.99 913.19 1649.37 914.43 1648.91C915.67 1648.46 917.117 1648.23 918.77 1648.23C921.374 1648.23 923.606 1648.79 925.466 1649.91C927.367 1650.98 928.835 1652.57 929.868 1654.68C930.901 1656.75 931.418 1659.27 931.418 1662.24C931.418 1665.43 930.798 1668.18 929.558 1670.49C928.359 1672.8 926.623 1674.58 924.35 1675.82C922.118 1677.02 919.452 1677.62 916.352 1677.62C914.079 1677.62 911.95 1677.23 909.966 1676.44C908.023 1675.66 906.308 1674.48 904.82 1672.91C903.373 1671.3 902.237 1669.27 901.41 1666.83C900.583 1664.39 900.17 1661.52 900.17 1658.21ZM916.166 1670.12C917.985 1670.12 919.473 1669.5 920.63 1668.26C921.787 1666.98 922.366 1665.01 922.366 1662.37C922.366 1660.22 921.87 1658.52 920.878 1657.28C919.886 1656.04 918.377 1655.42 916.352 1655.42C914.988 1655.42 913.789 1655.73 912.756 1656.35C911.723 1656.93 910.917 1657.7 910.338 1658.65C909.759 1659.6 909.47 1660.57 909.47 1661.56C909.47 1662.6 909.615 1663.63 909.904 1664.66C910.193 1665.65 910.607 1666.56 911.144 1667.39C911.723 1668.22 912.425 1668.88 913.252 1669.37C914.079 1669.87 915.05 1670.12 916.166 1670.12Z" fill="white"/>
+                <path d="M904.882 1726L921.498 1689.61H899.674V1681.73H931.418V1687.62L914.678 1726H904.882Z" fill="white"/>
+              </g>
+            </svg>
+          </div>
+          <div class="tool-title">Text Counter</div>
+          <div class="tool-desc">文字数を数えられます。</div>
+        </a>
+      </div>
+    </section>
+
+    <div id="flatViewContainer" style="display: none;">
+      <div class="tools-grid" id="flatGrid"></div>
+    </div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
