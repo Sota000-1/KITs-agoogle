@@ -60,29 +60,36 @@
       <button class="sub-link" data-tab="custom">Custom</button>
     </div>
 
-    <!-- ✦ 新設：横長ワイド時計ウィジェット（背景画像＆色変更対応） ✦ -->
+    <!-- ✦ 時計ウィジェット（ワイド＆画像高度カスタマイズ対応） ✦ -->
     <div class="portal-clock-banner" id="portalClockBanner">
       <div class="banner-overlay"></div>
 
-      <!-- 背景画像＆色カスタマイズ操作ツール -->
+      <!-- 右上カスタマイズツールバー -->
       <div class="banner-toolbar">
         <input type="file" id="portalBgInput" accept="image/*" style="display: none;">
         <button class="banner-btn" id="btnPortalUpload" title="好きな背景画像を設定">🖼 画像</button>
 
-        <input type="color" id="portalColorPicker" value="#121214" style="display: none;">
-        <button class="banner-btn" id="btnPortalColor" title="好きな背景色に変更">🎨 色</button>
+        <!-- 画像がある時だけ現れるボタン -->
+        <button class="banner-btn bg-ctrl-btn" id="btnPortalBlur" title="ぼかしのON/OFF" style="display: none;">✨ ぼかし</button>
+        <button class="banner-btn bg-ctrl-btn" id="btnPortalPos" title="ドラッグで画像位置を移動" style="display: none;">📍 位置</button>
 
-        <button class="banner-btn" id="btnPortalReset" title="初期背景に戻す">✕</button>
+        <input type="color" id="portalColorPicker" value="#121214" style="display: none;">
+        <button class="banner-btn" id="btnPortalColor" title="ページ全体の背景色を変更">🎨 色</button>
+
+        <button class="banner-btn" id="btnPortalReset" title="初期状態に戻す">✕</button>
       </div>
 
+      <!-- 位置調整中の操作ガイド（ドラッグ時に表示） -->
+      <div class="pos-guide-chip" id="posGuideChip">ドラッグして画像を移動（もう一度「📍 位置」を押して確定）</div>
+
       <div class="banner-content">
-        <!-- 左：年月日・曜日 -->
+        <!-- 年月日・曜日 -->
         <div class="banner-date-area">
           <div class="banner-date-main" id="portalDateMain">----年--月--日 (--)</div>
           <div class="banner-sub-text" id="portalDateSub">----.--.-- ---</div>
         </div>
 
-        <!-- 右：横長デジタル時計 -->
+        <!-- デジタル時計 -->
         <div class="banner-time-area">
           <span class="banner-time-main" id="portalTimeMain">00:00</span>
           <span class="banner-time-sec" id="portalTimeSec">:00</span>
