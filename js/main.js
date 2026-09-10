@@ -43,13 +43,20 @@ const btnPortalPos = document.getElementById('btnPortalPos');
 const portalColorPicker = document.getElementById('portalColorPicker');
 const btnPortalColor = document.getElementById('btnPortalColor');
 const btnPortalReset = document.getElementById('btnPortalReset');
+const bannerToolbar = document.querySelector('.banner-toolbar');
 
 if (portalClockBanner) {
-  // 状態保持
-  let isBlur = localStorage.getItem('portal_clock_blur') !== 'false'; // デフォルト true
-  let bgPosX = parseFloat(localStorage.getItem('portal_clock_pos_x')) || 50; // デフォルト 50%
-  let bgPosY = parseFloat(localStorage.getItem('portal_clock_pos_y')) || 50; // デフォルト 50%
+  let isBlur = localStorage.getItem('portal_clock_blur') !== 'false';
+  let bgPosX = parseFloat(localStorage.getItem('portal_clock_pos_x'));
+  let bgPosY = parseFloat(localStorage.getItem('portal_clock_pos_y'));
+  
+  if (isNaN(bgPosX)) bgPosX = 50;
+  if (isNaN(bgPosY)) bgPosY = 50;
+
   let isPositioningMode = false;
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let startPosX = 50, startPosY = 50;
 
   // 画像コントロールボタンの表示制御
   function updateBgControlsVisibility(hasImage) {
@@ -70,7 +77,21 @@ if (portalClockBanner) {
     }
   }
 
-  // 保存データの初期反映
+  // 位置調整モードの終了と保存
+  function exitPositioningMode() {
+    isPositioningMode = false;
+    isDragging = false;
+    portalClockBanner.classList.remove('is-positioning');
+    if (btnPortalPos) {
+      btnPortalPos.classList.remove('active');
+      btnPortalPos.textContent = '📍 位置';
+    }
+    // 確実に位置を保存
+    localStorage.setItem('portal_clock_pos_x', bgPosX);
+    localStorage.setItem('portal_clock_pos_y', bgPosY);
+  }
+
+  // 初期化・保存データの反映
   const savedBgImg = localStorage.getItem('portal_clock_bg_img');
   const savedPageBg = localStorage.getItem('custom_page_bg');
 
@@ -89,9 +110,18 @@ if (portalClockBanner) {
     if (portalColorPicker) portalColorPicker.value = savedPageBg;
   }
 
-  // 1. 画像アップロード
+  // 1. ツールバーのクリックがバナーに伝わって誤作動するのを防止
+  if (bannerToolbar) {
+    bannerToolbar.addEventListener('pointerdown', (e) => e.stopPropagation());
+    bannerToolbar.addEventListener('click', (e) => e.stopPropagation());
+  }
+
+  // 2. 画像アップロード
   if (btnPortalUpload && portalBgInput) {
-    btnPortalUpload.addEventListener('click', () => portalBgInput.click());
+    btnPortalUpload.addEventListener('click', (e) => {
+      e.stopPropagation();
+      portalBgInput.click();
+    });
 
     portalBgInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
@@ -108,72 +138,93 @@ if (portalClockBanner) {
         try {
           localStorage.setItem('portal_clock_bg_img', dataUrl);
         } catch (err) {
-          console.warn('画像が大きいため保存できませんでした（一時適用中）');
+          console.warn('画像が大きいため保存できませんでした');
         }
       };
       reader.readAsDataURL(file);
     });
   }
 
-  // 2. ぼかし ON / OFF 切り替え
+  // 3. ぼかし ON / OFF 切り替え
   if (btnPortalBlur) {
-    btnPortalBlur.addEventListener('click', () => {
+    btnPortalBlur.addEventListener('click', (e) => {
+      e.stopPropagation();
       isBlur = !isBlur;
       localStorage.setItem('portal_clock_blur', isBlur);
       applyBlurState();
     });
   }
 
-  // 3. 画像位置のドラッグ調整モード
+  // 4. 位置調整モードの ON / OFF 切替（もう一度押すと固定）
   if (btnPortalPos) {
-    btnPortalPos.addEventListener('click', () => {
-      isPositioningMode = !isPositioningMode;
-      portalClockBanner.classList.toggle('is-positioning', isPositioningMode);
-      btnPortalPos.classList.toggle('active', isPositioningMode);
+    btnPortalPos.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!portalClockBanner.classList.contains('has-bg')) return;
+
+      if (isPositioningMode) {
+        // すでに位置調整中なら確定して終了
+        exitPositioningMode();
+      } else {
+        // 位置調整を開始
+        isPositioningMode = true;
+        portalClockBanner.classList.add('is-positioning');
+        btnPortalPos.classList.add('active');
+        btnPortalPos.textContent = '✓ 完了';
+      }
     });
   }
 
-  let isDragging = false;
-  let startX = 0, startY = 0;
-  let startPosX = 50, startPosY = 50;
-
+  // 5. ドラッグ操作による位置変更
   portalClockBanner.addEventListener('pointerdown', (e) => {
     if (!isPositioningMode || !portalClockBanner.classList.contains('has-bg')) return;
+    
     isDragging = true;
     startX = e.clientX;
     startY = e.clientY;
     startPosX = bgPosX;
     startPosY = bgPosY;
-    portalClockBanner.setPointerCapture(e.pointerId);
+
+    try {
+      portalClockBanner.setPointerCapture(e.pointerId);
+    } catch (err) {}
   });
 
   portalClockBanner.addEventListener('pointermove', (e) => {
-    if (!isDragging) return;
+    if (!isDragging || !isPositioningMode) return;
+
     const dx = e.clientX - startX;
     const dy = e.clientY - startY;
 
-    // 移動感度を計算
-    bgPosX = Math.max(0, Math.min(100, startPosX - (dx / portalClockBanner.clientWidth) * 100));
-    bgPosY = Math.max(0, Math.min(100, startPosY - (dy / portalClockBanner.clientHeight) * 100));
+    // つかんだ画像が手の動きに自然についてくるように計算
+    const moveFactorX = (dx / portalClockBanner.clientWidth) * 100;
+    const moveFactorY = (dy / portalClockBanner.clientHeight) * 100;
+
+    bgPosX = Math.max(0, Math.min(100, startPosX - moveFactorX));
+    bgPosY = Math.max(0, Math.min(100, startPosY - moveFactorY));
 
     applyBgPosition();
   });
 
-  function stopDrag(e) {
+  function handlePointerEnd(e) {
     if (isDragging) {
       isDragging = false;
       localStorage.setItem('portal_clock_pos_x', bgPosX);
       localStorage.setItem('portal_clock_pos_y', bgPosY);
-      try { portalClockBanner.releasePointerCapture(e.pointerId); } catch(err){}
+      try {
+        portalClockBanner.releasePointerCapture(e.pointerId);
+      } catch (err) {}
     }
   }
 
-  portalClockBanner.addEventListener('pointerup', stopDrag);
-  portalClockBanner.addEventListener('pointercancel', stopDrag);
+  portalClockBanner.addEventListener('pointerup', handlePointerEnd);
+  portalClockBanner.addEventListener('pointercancel', handlePointerEnd);
 
-  // 4. ページ全体の背景色変更
+  // 6. ページ背景色ピッカー
   if (btnPortalColor && portalColorPicker) {
-    btnPortalColor.addEventListener('click', () => portalColorPicker.click());
+    btnPortalColor.addEventListener('click', (e) => {
+      e.stopPropagation();
+      portalColorPicker.click();
+    });
 
     portalColorPicker.addEventListener('input', (e) => {
       const color = e.target.value;
@@ -182,9 +233,10 @@ if (portalClockBanner) {
     });
   }
 
-  // 5. リセット
+  // 7. リセット
   if (btnPortalReset) {
-    btnPortalReset.addEventListener('click', () => {
+    btnPortalReset.addEventListener('click', (e) => {
+      e.stopPropagation();
       localStorage.removeItem('portal_clock_bg_img');
       localStorage.removeItem('custom_page_bg');
       localStorage.removeItem('portal_clock_blur');
@@ -194,9 +246,7 @@ if (portalClockBanner) {
       isBlur = true;
       bgPosX = 50;
       bgPosY = 50;
-      isPositioningMode = false;
-      portalClockBanner.classList.remove('is-positioning');
-      if (btnPortalPos) btnPortalPos.classList.remove('active');
+      exitPositioningMode();
 
       portalClockBanner.style.backgroundImage = 'none';
       portalClockBanner.classList.remove('has-bg');
