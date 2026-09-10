@@ -1,15 +1,105 @@
-// ─── 1. サブナビ下のリアルタイム時計 ───
-const miniClock = document.getElementById('miniClock');
-if (miniClock) {
-  function updateMiniClock() {
-    const now = new Date();
-    const h = String(now.getHours()).padStart(2, '0');
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const s = String(now.getSeconds()).padStart(2, '0');
-    miniClock.textContent = `${h}:${m}:${s} JST`;
+// ─── 1. 横長時計ウィジェットのリアルタイム更新 ───
+const portalDateMain = document.getElementById('portalDateMain');
+const portalDateSub = document.getElementById('portalDateSub');
+const portalTimeMain = document.getElementById('portalTimeMain');
+const portalTimeSec = document.getElementById('portalTimeSec');
+
+const weekdaysJa = ['日', '月', '火', '水', '木', '金', '土'];
+const weekdaysEn = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
+function updatePortalClock() {
+  const now = new Date();
+
+  // 年月日・曜日
+  const year = now.getFullYear();
+  const month = now.getMonth() + 1;
+  const date = now.getDate();
+  const day = now.getDay();
+
+  if (portalDateMain && portalDateSub) {
+    portalDateMain.innerHTML = `${year}年${month}月${date}日 <span class="banner-weekday">(${weekdaysJa[day]})</span>`;
+    portalDateSub.textContent = `${year}.${String(month).padStart(2, '0')}.${String(date).padStart(2, '0')} ${weekdaysEn[day]}`;
   }
-  updateMiniClock();
-  setInterval(updateMiniClock, 1000);
+
+  // 時間（時:分 と 秒）
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  const s = String(now.getSeconds()).padStart(2, '0');
+
+  if (portalTimeMain && portalTimeSec) {
+    portalTimeMain.textContent = `${h}:${m}`;
+    portalTimeSec.textContent = `:${s}`;
+  }
+}
+updatePortalClock();
+setInterval(updatePortalClock, 1000);
+
+// ─── 横長時計の背景カスタマイズ（画像 ＆ 背景色） ───
+const portalClockBanner = document.getElementById('portalClockBanner');
+const portalBgInput = document.getElementById('portalBgInput');
+const btnPortalUpload = document.getElementById('btnPortalUpload');
+const portalColorPicker = document.getElementById('portalColorPicker');
+const btnPortalColor = document.getElementById('btnPortalColor');
+const btnPortalReset = document.getElementById('btnPortalReset');
+
+if (portalClockBanner) {
+  // 保存された背景の読み込み
+  const savedBgImg = localStorage.getItem('portal_clock_bg_img');
+  const savedBgColor = localStorage.getItem('portal_clock_bg_color');
+
+  if (savedBgImg) {
+    portalClockBanner.style.backgroundImage = `url(${savedBgImg})`;
+    portalClockBanner.classList.add('has-bg');
+  }
+  if (savedBgColor) {
+    portalClockBanner.style.backgroundColor = savedBgColor;
+  }
+
+  // 画像アップロード
+  if (btnPortalUpload && portalBgInput) {
+    btnPortalUpload.addEventListener('click', () => portalBgInput.click());
+
+    portalBgInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const dataUrl = event.target.result;
+        portalClockBanner.style.backgroundImage = `url(${dataUrl})`;
+        portalClockBanner.classList.add('has-bg');
+        try {
+          localStorage.setItem('portal_clock_bg_img', dataUrl);
+        } catch (err) {
+          console.warn('画像が大きいため保存できませんでした（一時適用中）');
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // 背景色ピッカー
+  if (btnPortalColor && portalColorPicker) {
+    btnPortalColor.addEventListener('click', () => portalColorPicker.click());
+
+    portalColorPicker.addEventListener('input', (e) => {
+      const color = e.target.value;
+      portalClockBanner.style.backgroundColor = color;
+      localStorage.setItem('portal_clock_bg_color', color);
+    });
+  }
+
+  // リセット
+  if (btnPortalReset) {
+    btnPortalReset.addEventListener('click', () => {
+      localStorage.removeItem('portal_clock_bg_img');
+      localStorage.removeItem('portal_clock_bg_color');
+      portalClockBanner.style.backgroundImage = 'none';
+      portalClockBanner.style.backgroundColor = 'var(--card-bg)';
+      portalClockBanner.classList.remove('has-bg');
+      if (portalBgInput) portalBgInput.value = '';
+    });
+  }
 }
 
 // ─── 2. タブ切り替え & アイコン復元 ───
