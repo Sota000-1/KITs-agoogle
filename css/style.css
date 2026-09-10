@@ -654,19 +654,23 @@ body {
   .section-title { font-size: 1.6rem; }
 }
 
-/* ─── index.html 上部：横長時計バナー ─── */
+/* ─── index.html 上部：時計ウィジェット ─── */
 .portal-clock-banner {
   position: relative;
   width: 100%;
-  min-height: 120px;
+  max-width: 680px;          /* 横幅を程よく縮めてスマートに */
+  min-height: 200px;         /* 高さをしっかり確保 */
+  margin: 16px auto 28px;    /* 画面中央に配置 */
   background-color: var(--card-bg);
   background-size: cover;
   background-position: center;
   border: 1px solid var(--sharp-line);
-  border-radius: 20px;
-  margin: 10px 0 24px;
+  border-radius: 24px;
   overflow: hidden;
   box-shadow: var(--icon-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 
@@ -674,9 +678,9 @@ body {
 .banner-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -690,33 +694,37 @@ body {
 .portal-clock-banner.has-bg {
   color: #ffffff !important;
 }
-.portal-clock-banner.has-bg .banner-sub-text {
+.portal-clock-banner.has-bg .banner-sub-text,
+.portal-clock-banner.has-bg .banner-time-zone {
   color: rgba(255, 255, 255, 0.75) !important;
 }
 
-/* 時計ウィジェット内部の横長レイアウト */
+/* センターレイアウト */
 .banner-content {
   position: relative;
   z-index: 2;
   display: flex;
+  flex-direction: column;   /* 縦並びにして中央揃え */
   align-items: center;
-  justify-content: space-between;
-  padding: 22px 32px;
-  gap: 20px;
-  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  padding: 38px 24px 32px;
+  gap: 10px;
+  width: 100%;
 }
 
-/* 左側：年月日・曜日 */
+/* 上部：年月日・曜日 */
 .banner-date-area {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  gap: 2px;
 }
 
 .banner-date-main {
-  font-size: clamp(1.1rem, 2.2vw, 1.45rem);
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
   font-weight: 300;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
 }
 
 .banner-date-main .banner-weekday {
@@ -728,81 +736,101 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   color: var(--text-sub);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
-/* 右側：大型デジタル時計 */
+/* 中央：大型デジタル時計 */
 .banner-time-area {
   display: flex;
   align-items: baseline;
+  justify-content: center;
   font-family: 'JetBrains Mono', monospace;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
+  margin-top: 2px;
 }
 
 .banner-time-main {
-  font-size: clamp(2.4rem, 6.5vw, 4.2rem);
+  font-size: clamp(3.2rem, 9.5vw, 4.8rem); /* 迫力のある大きなフォント */
   font-weight: 200;
   line-height: 1;
 }
 
 .banner-time-sec {
-  font-size: clamp(1.2rem, 3.2vw, 2.2rem);
+  font-size: clamp(1.5rem, 4.2vw, 2.4rem);
   color: var(--sharp-line-bright);
   margin-left: 6px;
   font-weight: 300;
 }
 
 .banner-time-zone {
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-sub);
   margin-left: 10px;
   letter-spacing: 0.08em;
+  font-weight: 400;
 }
 
-/* 右上の設定コントロール（画像・色変更） */
+/* 操作ツールバー（常にハッキリ見やすく配置） */
 .banner-toolbar {
   position: absolute;
-  top: 10px;
-  right: 14px;
-  z-index: 3;
+  top: 14px;
+  right: 16px;
+  z-index: 4;
   display: flex;
-  gap: 6px;
-  opacity: 0.7;
-  transition: opacity 0.2s;
-}
-
-.portal-clock-banner:hover .banner-toolbar {
-  opacity: 1;
+  align-items: center;
+  gap: 8px;
+  background: var(--nav-bg);
+  border: 1px solid var(--sharp-line);
+  padding: 4px 8px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .banner-btn {
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--sharp-line);
-  color: #fff;
+  background: none;
+  border: 1px solid transparent;
+  color: var(--text-main);
   font-family: 'Inter', sans-serif;
-  font-size: 0.72rem;
-  padding: 3px 9px;
-  border-radius: 6px;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 9999px;
   cursor: pointer;
   outline: none;
-  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
 }
 
 .banner-btn:hover {
+  background: var(--card-hover);
+  border-color: var(--sharp-line);
+}
+
+.portal-clock-banner.has-bg .banner-toolbar {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.portal-clock-banner.has-bg .banner-btn {
+  color: #ffffff;
+}
+
+.portal-clock-banner.has-bg .banner-btn:hover {
   background: rgba(255, 255, 255, 0.2);
-  border-color: #fff;
 }
 
 @media (max-width: 640px) {
+  .portal-clock-banner {
+    min-height: 180px;
+  }
   .banner-content {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 24px 20px 18px;
-    gap: 12px;
+    padding: 46px 16px 24px;
   }
   .banner-toolbar {
-    top: 8px;
-    right: 8px;
+    top: 10px;
+    right: 12px;
+    gap: 4px;
+    padding: 3px 6px;
   }
 }
