@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APA Style Editor | KITs (kits-tools.net)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/apa.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('tools_theme');
+      if (savedTheme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+</head>
+<body>
+
+  <!-- メインヘッダー -->
+  <header class="header">
+    <button class="menu-btn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
+        <line x1="2" y1="6" x2="22" y2="6"></line>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <line x1="2" y1="18" x2="22" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Top</a>
+      <a href="index.html" class="nav-link active">Tools</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="#" class="nav-link">News</a>
+      <a href="#" class="nav-link">Link</a>
+      <a href="#" class="nav-link">Contact</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3.5"></line>
+        <line x1="12" y1="20.5" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="6" y2="6"></line>
+        <line x1="18" y1="18" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3.5" y2="12"></line>
+        <line x1="20.5" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="6" y2="18"></line>
+        <line x1="18" y1="6" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </header>
+
+  <main class="container">
+    <div class="apa-container">
+
+      <!-- ヘッダータイトル -->
+      <div>
+        <h1 style="font-size: 1.8rem; font-weight: 200; margin-bottom: 6px;">APA Style Editor</h1>
+        <p style="font-size: 0.85rem; color: var(--text-sub); font-weight: 300;">
+          札幌開成中等教育学校レポート作成ガイド（APA第7版・日本心理学会基準）準拠
+        </p>
+      </div>
+
+      <!-- メディア種別セレクター -->
+      <div class="media-tabs">
+        <button class="media-tab active" data-media="web">🌐 Webページ</button>
+        <button class="media-tab" data-media="book">📚 書籍</button>
+        <button class="media-tab" data-media="journal">📑 学術論文</button>
+        <button class="media-tab" data-media="ai">🤖 生成AI (公式APA)</button>
+      </div>
+
+      <!-- ─── 入力フォームパネル ─── -->
+      <form class="form-panel" id="citationForm" onsubmit="return false;">
+
+        <!-- 著者名 -->
+        <div class="form-row">
+          <label class="form-label" for="authorInput">
+            <span>著者名 / 発行組織</span>
+            <span class="hint">日本語は姓名フルネーム（例: 山田剛史・林創）/ 英語は Surname, I.</span>
+          </label>
+          <input type="text" id="authorInput" class="form-input" placeholder="例: 松本創 または 総務省統計局">
+          <label class="form-checkbox-label">
+            <input type="checkbox" id="authorMissing"> 著者不明（記事タイトルから開始）
+          </label>
+        </div>
+
+        <!-- 日付 / 出版年 -->
+        <div class="form-grid-3" id="dateSection">
+          <div class="form-row">
+            <label class="form-label" for="yearInput">出版年 / 更新年</label>
+            <input type="number" id="yearInput" class="form-input" placeholder="2024" min="1900" max="2099">
+          </div>
+          <div class="form-row" id="monthCol">
+            <label class="form-label" for="monthSelect">月（Web/記事用）</label>
+            <select id="monthSelect" class="form-select">
+              <option value="">なし</option>
+              <option value="January">1月 (January)</option>
+              <option value="February">2月 (February)</option>
+              <option value="March">3月 (March)</option>
+              <option value="April">4月 (April)</option>
+              <option value="May">5月 (May)</option>
+              <option value="June">6月 (June)</option>
+              <option value="July">7月 (July)</option>
+              <option value="August">8月 (August)</option>
+              <option value="September">9月 (September)</option>
+              <option value="October">10月 (October)</option>
+              <option value="November">11月 (November)</option>
+              <option value="December">12月 (December)</option>
+            </select>
+          </div>
+          <div class="form-row" id="dayCol">
+            <label class="form-label" for="dayInput">日（Web/記事用）</label>
+            <input type="number" id="dayInput" class="form-input" placeholder="14" min="1" max="31">
+          </div>
+        </div>
+        <div style="margin-top: -12px;">
+          <label class="form-checkbox-label">
+            <input type="checkbox" id="dateUnknown"> 日付なし (n.d.)
+          </label>
+        </div>
+
+        <!-- タイトル -->
+        <div class="form-row">
+          <label class="form-label" for="titleInput">
+            <span id="titleLabelText">タイトル</span>
+            <span class="hint">「」や『』は付けない</span>
+          </label>
+          <input type="text" id="titleInput" class="form-input" placeholder="例: 「役に立つ学問」が事前にはわからない根本理由">
+        </div>
+
+        <!-- ソース / 出典情報（メディアごとに切り替え） -->
+        <div class="form-grid-2" id="sourceSection">
+          <div class="form-row" id="sourceCol1">
+            <label class="form-label" id="sourceLabel1">Webサイト名 / 掲載誌</label>
+            <input type="text" id="sourceInput1" class="form-input" placeholder="例: 東洋経済 ONLINE">
+            <label class="form-checkbox-label" id="authorSameSiteLabel">
+              <input type="checkbox" id="authorSameSite"> 著者とサイト名が同一（サイト名を省略）
+            </label>
+          </div>
+
+          <div class="form-row" id="sourceCol2">
+            <label class="form-label" id="sourceLabel2">巻数・ページ等</label>
+            <input type="text" id="sourceInput2" class="form-input" placeholder="例: 51, 31-43">
+          </div>
+        </div>
+
+        <!-- URL / DOI -->
+        <div class="form-row" id="urlSection">
+          <label class="form-label" for="urlInput">
+            <span>URL または DOI</span>
+            <span class="hint">末尾にピリオドはつけない</span>
+          </label>
+          <input type="text" id="urlInput" class="form-input" placeholder="https://...">
+        </div>
+
+        <!-- 検索日（Web用 Retrieved） -->
+        <div class="form-row" id="retrievedSection">
+          <label class="form-label">
+            <span>検索日・閲覧日（Retrieved date）</span>
+            <button class="btn-copy" id="btnTodayRetrieved" style="padding: 2px 8px; font-size: 0.7rem;">今日の日付を入力</button>
+          </label>
+          <div class="form-grid-3">
+            <select id="retrievedMonth" class="form-select">
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
+            <input type="number" id="retrievedDay" class="form-input" placeholder="日 (例: 24)" min="1" max="31">
+            <input type="number" id="retrievedYear" class="form-input" placeholder="年 (例: 2024)" min="1900" max="2099">
+          </div>
+        </div>
+
+      </form>
+
+      <!-- ─── 出力・生成結果パネル ─── -->
+      <div class="result-section">
+
+        <!-- 1. 引用文献リスト用（参考文献一覧） -->
+        <div class="result-card">
+          <div class="result-header">
+            <span class="result-title">✦ 引用文献リストの書式（参考文献一覧）</span>
+            <div class="copy-btn-group">
+              <button class="btn-copy" id="copyRichBtn">📄 斜体を保持してコピー</button>
+              <button class="btn-copy" id="copyPlainBtn">テキストコピー</button>
+            </div>
+          </div>
+          <!-- ぶら下げインデント表示プレビュー -->
+          <div class="citation-box" id="citationPreview">
+            （入力するとここに正しいAPAフォーマットが生成されます）
+          </div>
+        </div>
+
+        <!-- 2. 本文中引用（ナラティブ引用 ＆ カッコ引用） -->
+        <div class="result-card">
+          <div class="result-header">
+            <span class="result-title">✦ 本文中の引用（In-text Citation）</span>
+          </div>
+          <div class="intext-grid">
+            <div class="intext-box">
+              <span class="intext-type">【ナラティブ引用】（主語・文中）</span>
+              <div class="intext-text">
+                <span id="narrativePreview">著者(年)</span>
+                <button class="btn-copy" id="copyNarrativeBtn">コピー</button>
+              </div>
+            </div>
+            <div class="intext-box">
+              <span class="intext-type">【カッコ引用】（文末）</span>
+              <div class="intext-text">
+                <span id="parentheticalPreview">(著者, 年)</span>
+                <button class="btn-copy" id="copyParentheticalBtn">コピー</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script src="js/apa.js"></script>
+</body>
+</html>
