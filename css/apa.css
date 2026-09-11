@@ -5,10 +5,10 @@
   padding: 20px 0 60px;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 28px;
 }
 
-/* メディア種別セレクター（タブ切り替え） */
+/* メディア種別セレクター（タブ） */
 .media-tabs {
   display: flex;
   gap: 8px;
@@ -50,7 +50,6 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* AIモード専用のバッジ */
 .media-tab[data-media="ai"].active {
   background: #a855f7;
   color: #ffffff;
@@ -61,10 +60,16 @@
   background: var(--card-bg);
   border: 1px solid var(--sharp-line);
   border-radius: 20px;
-  padding: 28px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
+}
+
+.media-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .form-row {
@@ -119,7 +124,61 @@
   box-shadow: 0 0 0 1px #a855f7;
 }
 
-/* チェックボックス・補助トグル */
+/* ガイド図10の補足説明吹き出し */
+.field-explanation {
+  font-size: 0.76rem;
+  color: var(--text-sub);
+  line-height: 1.5;
+  background: rgba(168, 85, 247, 0.06);
+  border-left: 2px solid #a855f7;
+  padding: 6px 12px;
+  border-radius: 0 6px 6px 0;
+  margin-top: 2px;
+}
+
+/* URL自動取得ボタン */
+.btn-fetch {
+  background: #a855f7;
+  color: #fff;
+  border: none;
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-fetch:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+.btn-fetch:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fetch-status-msg {
+  font-size: 0.76rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: #a855f7;
+}
+
+.btn-mini {
+  background: none;
+  border: 1px solid var(--sharp-line);
+  color: var(--text-sub);
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-mini:hover {
+  color: var(--text-main);
+  border-color: var(--sharp-active);
+}
+
 .form-checkbox-label {
   display: inline-flex;
   align-items: center;
@@ -128,14 +187,30 @@
   color: var(--text-sub);
   cursor: pointer;
   user-select: none;
-  margin-top: 4px;
 }
-
 .form-checkbox-label input {
   accent-color: #a855f7;
 }
 
-/* ─── 出力・プレビューパネル ─── */
+/* ✦ メイン作成ボタン ✦ */
+.btn-create {
+  background: var(--sharp-active);
+  color: var(--bg);
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 36px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btn-create:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+/* ─── 出力パネル ─── */
 .result-section {
   display: flex;
   flex-direction: column;
@@ -150,7 +225,6 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  position: relative;
 }
 
 .result-header {
@@ -166,9 +240,6 @@
   font-size: 0.8rem;
   color: #a855f7;
   letter-spacing: 0.08em;
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .copy-btn-group {
@@ -187,37 +258,30 @@
   cursor: pointer;
   outline: none;
   transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
 }
-
 .btn-copy:hover {
   background: var(--card-hover);
   border-color: #a855f7;
 }
-
 .btn-copy.copied {
   background: #a855f7;
   color: #fff;
   border-color: #a855f7;
 }
 
-/* 引用文献リスト表示（ぶら下げインデント対応） */
+/* ぶら下げインデント表示 */
 .citation-box {
   font-size: 0.96rem;
-  line-height: 1.8;
+  line-height: 1.85;
   padding-left: 2em;
-  text-indent: -2em; /* ぶら下げインデント（ガイドp.14準拠） */
+  text-indent: -2em;
   word-break: break-all;
 }
-
 .citation-box em {
   font-style: italic;
   color: inherit;
 }
 
-/* 本文中引用グリッド */
 .intext-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -242,7 +306,6 @@
 
 .intext-text {
   font-size: 0.95rem;
-  font-weight: 400;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -254,5 +317,8 @@
   }
   .form-panel {
     padding: 20px 16px;
+  }
+  .btn-create {
+    width: 100%;
   }
 }
