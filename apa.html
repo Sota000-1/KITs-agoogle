@@ -57,7 +57,6 @@
   <main class="container">
     <div class="apa-container">
 
-      <!-- タイトル -->
       <div>
         <h1 style="font-size: 1.85rem; font-weight: 200; margin-bottom: 6px;">APA Style Editor</h1>
         <p style="font-size: 0.85rem; color: var(--text-sub); font-weight: 300;">
@@ -65,7 +64,7 @@
         </p>
       </div>
 
-      <!-- メディア種別セレクター（完全に独立した4つのモード） -->
+      <!-- メディア種別セレクター -->
       <div class="media-tabs">
         <button class="media-tab active" data-media="web">🌐 Webページ</button>
         <button class="media-tab" data-media="book">📚 書籍</button>
@@ -78,61 +77,59 @@
 
         <!-- ==================== 1. Webページ用フォーム ==================== -->
         <div class="media-form-group" id="formWeb">
-          <!-- URL自動取得バー -->
+          <!-- URL入力 & 自動取得 -->
           <div class="form-row">
             <label class="form-label">
               <span>URL（Webアドレス）</span>
               <span class="hint">入力して自動取得できます</span>
             </label>
             <div style="display: flex; gap: 8px;">
-              <input type="url" id="webUrl" class="form-input" style="flex: 1;" placeholder="https://toyokeizai.net/articles/..." />
+              <input type="url" id="webUrl" class="form-input" style="flex: 1;" placeholder="https://..." />
               <button type="button" class="btn-fetch" id="btnAutoFetch">✨ URLから自動取得</button>
             </div>
             <span id="fetchStatus" class="fetch-status-msg"></span>
           </div>
 
-          <!-- 記事タイトルとWebサイト名の明確な区別ガイド -->
+          <!-- ① 記事タイトル -->
           <div class="form-row">
             <label class="form-label">
               <span style="color: var(--text-main); font-weight: 500;">① 記事タイトル（Webページタイトル）</span>
-              <span class="hint">「」はつけない</span>
+              <span class="hint">※「」はつけない</span>
             </label>
             <input type="text" id="webTitle" class="form-input" placeholder="例: 「役に立つ学問」が事前にはわからない根本理由" />
             <div class="field-explanation">
-              💡 <strong>開いたページの上部にある記事そのものの見出し・題名</strong>を入力します。
+              💡 <strong>ページ上部にある記事そのものの見出し・題名</strong>を入力します。
             </div>
           </div>
 
+          <!-- ② サイト名 -->
           <div class="form-row">
             <label class="form-label">
               <span style="color: var(--text-main); font-weight: 500;">② Webサイトのタイトル（サイト名）</span>
             </label>
-            <input type="text" id="webSiteName" class="form-input" placeholder="例: 東洋経済 ONLINE" />
+            <input type="text" id="webSiteName" class="form-input" placeholder="例: 東洋経済 ONLINE または 日本陸上競技連盟" />
             <div class="field-explanation">
-              💡 <strong>サイトのヘッダーロゴや検索結果に出るメディア全体の名前</strong>（例: NHK NEWS WEB、総務省統計局など）を入力します。
+              💡 <strong>メディア名や組織全体の名前</strong>を入力します（著者名と同一の場合は自動で省略されます）。
             </div>
-            <label class="form-checkbox-label">
-              <input type="checkbox" id="webAuthorSameSite" /> 著者名とサイト名が同一（サイト名を省略）
-            </label>
           </div>
 
           <!-- 著者名 -->
           <div class="form-row">
             <label class="form-label">
               <span>著者名 / 執筆組織名</span>
-              <span class="hint">日本語フルネーム（例: 松本創）/ 組織名（例: 総務省統計局）</span>
+              <span class="hint">※不明な場合は空欄のままでOK（自動でタイトル繰り上げ）</span>
             </label>
-            <input type="text" id="webAuthor" class="form-input" placeholder="例: 松本創" />
-            <label class="form-checkbox-label">
-              <input type="checkbox" id="webAuthorMissing" /> 著者名が見つからない（記事タイトルから開始）
-            </label>
+            <input type="text" id="webAuthor" class="form-input" placeholder="例: 松本創 または 日本陸上競技連盟" />
           </div>
 
           <!-- 更新日 -->
           <div class="form-row">
-            <label class="form-label">記事の更新年月日（わかる範囲で詳細に）</label>
+            <label class="form-label">
+              <span>記事の更新年月日</span>
+              <span class="hint">※不明な場合は空欄でOK（自動で n.d. 扱い）</span>
+            </label>
             <div class="form-grid-3">
-              <input type="number" id="webYear" class="form-input" placeholder="年 (例: 2019)" min="1900" max="2099" />
+              <input type="number" id="webYear" class="form-input" placeholder="年 (例: 2024)" min="1900" max="2099" />
               <select id="webMonth" class="form-select">
                 <option value="">月なし</option>
                 <option value="January">1月 (January)</option>
@@ -150,9 +147,6 @@
               </select>
               <input type="number" id="webDay" class="form-input" placeholder="日 (例: 14)" min="1" max="31" />
             </div>
-            <label class="form-checkbox-label">
-              <input type="checkbox" id="webDateUnknown" /> 日付の記載がない (n.d.)
-            </label>
           </div>
 
           <!-- 検索日（Retrieved） -->
@@ -178,7 +172,7 @@
           <div class="form-row">
             <label class="form-label">
               <span>著者名</span>
-              <span class="hint">日本語はフルネームで連名は「・」、英語は「Surname, Initial」</span>
+              <span class="hint">日本語はフルネーム（連名は「・」）、英語は Surname, I.</span>
             </label>
             <input type="text" id="bookAuthor" class="form-input" placeholder="例: 山田剛史・林創" />
           </div>
@@ -274,17 +268,16 @@
           </div>
         </div>
 
-        <!-- ✦ 明示的な作成ボタン ✦ -->
+        <!-- 作成ボタン -->
         <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
           <button type="button" class="btn-create" id="btnGenerate">✦ APA引用を作成する</button>
         </div>
 
       </div>
 
-      <!-- ─── 出力・生成結果パネル ─── -->
+      <!-- ─── 出力パネル ─── -->
       <div class="result-section" id="resultSection">
-
-        <!-- 1. 引用文献リスト用 -->
+        <!-- 引用文献リスト用 -->
         <div class="result-card">
           <div class="result-header">
             <span class="result-title">✦ 引用文献リストの書式（参考文献一覧）</span>
@@ -298,7 +291,7 @@
           </div>
         </div>
 
-        <!-- 2. 本文中引用 -->
+        <!-- 本文中引用 -->
         <div class="result-card">
           <div class="result-header">
             <span class="result-title">✦ 本文中の引用（In-text Citation）</span>
@@ -320,7 +313,6 @@
             </div>
           </div>
         </div>
-
       </div>
 
     </div>
