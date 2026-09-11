@@ -31,14 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  // ─── 1. メディアフォームの完全切り替え ───
+  // ─── 1. メディアフォーム切り替え ───
   mediaTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       mediaTabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
       currentMedia = tab.dataset.media;
 
-      // すべてのフォームグループを隠し、選択されたものだけを表示
       Object.keys(forms).forEach(key => {
         if (forms[key]) forms[key].style.display = (key === currentMedia) ? 'flex' : 'none';
       });
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ─── 2. 今日の閲覧日初期設定 ───
+  // ─── 2. 閲覧日（Retrieved）初期化 ───
   const retrievedMonth = document.getElementById('retrievedMonth');
   const retrievedDay = document.getElementById('retrievedDay');
   const retrievedYear = document.getElementById('retrievedYear');
@@ -65,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnTodayRetrieved) btnTodayRetrieved.addEventListener('click', setTodayRetrieved);
   }
 
-  // ─── 3. ✨ URLから自動取得（Microlink API使用） ───
+  // ─── 3. ✨ URL自動取得（組織名フォールバック対応） ───
   if (btnAutoFetch && webUrl) {
     btnAutoFetch.addEventListener('click', async () => {
       const url = webUrl.value.trim();
@@ -85,16 +84,24 @@ document.addEventListener('DOMContentLoaded', () => {
         if (json.status === 'success' && json.data) {
           const d = json.data;
 
-          // ① 記事タイトル（ページタイトル）
+          // ① 記事タイトル
           if (d.title) document.getElementById('webTitle').value = d.title;
 
-          // ② サイト名（メディア名）
-          if (d.publisher) document.getElementById('webSiteName').value = d.publisher;
+          // ② サイト名（メディア・組織名）
+          const publisher = d.publisher || '';
+          if (publisher) document.getElementById('webSiteName').value = publisher;
 
-          // 著者名
-          if (d.author) document.getElementById('webAuthor').value = d.author;
+          // 著者名（個人著者がなければ、組織名を著者に設定！）
+          const authorInput = document.getElementById('webAuthor');
+          if (d.author) {
+            authorInput.value = d.author;
+          } else if (publisher) {
+            authorInput.value = publisher; // 例: 日本陸上競技連盟
+            // 著者名とサイト名が同一になるため自動で省略チェック
+            document.getElementById('webAuthorSameSite').checked = true;
+          }
 
-          // 更新日（ISO日付から年月日に分解）
+          // 更新日
           if (d.date) {
             const pubDate = new Date(d.date);
             if (!isNaN(pubDate.getTime())) {
@@ -104,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
           }
 
-          fetchStatus.textContent = '✓ 情報を自動取得しました！内容を確認・調整してください。';
+          fetchStatus.textContent = '✓ 情報を自動取得しました！';
           generateCitation();
         } else {
-          fetchStatus.textContent = '⚠️ 自動取得できませんでした。手動で入力してください。';
+          fetchStatus.textContent = '⚠️ 自動取得できませんでした。手動でご入力ください。';
         }
       } catch (err) {
         fetchStatus.textContent = '⚠️ 通信エラーが発生しました。手動でご入力ください。';
@@ -117,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── 4. APA引用生成ロジック ───
+  // ─── 4. 引用生成コアロジック ───
   function generateCitation() {
     let htmlParts = [];
     let plainParts = [];
@@ -137,58 +144,71 @@ document.addEventListener('DOMContentLoaded', () => {
       const day = document.getElementById('webDay').value.trim();
       const isNd = document.getElementById('webDateUnknown').checked;
 
-      // 著者
-      if (!isMissingAuthor && author) {
-        htmlParts.push(`${author} `);
-        plainParts.push(`${author} `);
-        inTextAuthor = author;
-      } else {
-        inTextAuthor = title ? title.substring(0, 15) + '…' : 'タイトル';
-      }
-
-      // 日付 (例: (2019, July, 14) または (n.d.))
+      // 日付の決定
+      let dateStr = '';
       if (isNd) {
-        htmlParts.push(`(n.d.). `);
-        plainParts.push(`(n.d.). `);
+        dateStr = '(n.d.). ';
         inTextYear = 'n.d.';
       } else if (year) {
         inTextYear = year;
         if (month) {
           if (day) {
-            htmlParts.push(`(${year}, ${month}, ${day}). `);
-            plainParts.push(`(${year}, ${month}, ${day}). `);
+            dateStr = `(${year}, ${month}, ${day}). `;
             inTextYear = `${year}, ${month}, ${day}`;
           } else {
-            htmlParts.push(`(${year}, ${month}). `);
-            plainParts.push(`(${year}, ${month}). `);
+            dateStr = `(${year}, ${month}). `;
             inTextYear = `${year}, ${month}`;
           }
         } else {
-          htmlParts.push(`(${year}). `);
-          plainParts.push(`(${year}). `);
+          dateStr = `(${year}). `;
         }
       }
 
-      // 記事タイトル（斜体）
-      if (title) {
-        htmlParts.push(`<em>${title}</em>. `);
-        plainParts.push(`${title}. `);
+      // 著者の有無による分岐（ご指摘のルール②対応）
+      if (!isMissingAuthor && author) {
+        // 著者または組織名が存在する場合
+        htmlParts.push(`${author} `);
+        plainParts.push(`${author} `);
+        if (dateStr) {
+          htmlParts.push(dateStr);
+          plainParts.push(dateStr);
+        }
+        if (title) {
+          htmlParts.push(`<em>${title}</em>. `);
+          plainParts.push(`${title}. `);
+        }
+        inTextAuthor = author;
+      } else {
+        // 著者・組織名が完全不明の場合：記事タイトルを先頭に配置
+        if (title) {
+          htmlParts.push(`<em>${title}</em>. `);
+          plainParts.push(`${title}. `);
+          // 本文中引用はタイトルを二重引用符 "" で囲む（ルール②準拠）
+          const shortTitle = title.length > 12 ? title.substring(0, 12) + '…' : title;
+          inTextAuthor = `"${shortTitle}"`;
+        } else {
+          inTextAuthor = '"タイトル"';
+        }
+        if (dateStr) {
+          htmlParts.push(dateStr);
+          plainParts.push(dateStr);
+        }
       }
 
-      // Webサイト名（著者と同じなら省略）
+      // Webサイト名（著者と同一の場合は省略）
       if (siteName && !isSameSite) {
         htmlParts.push(`${siteName}. `);
         plainParts.push(`${siteName}. `);
       }
 
-      // Retrieved 日付
+      // 検索日（Retrieved）
       if (retrievedMonth.value && retrievedDay.value && retrievedYear.value) {
         const ret = `Retrieved ${retrievedMonth.value}, ${retrievedDay.value}, ${retrievedYear.value}, from `;
         htmlParts.push(ret);
         plainParts.push(ret);
       }
 
-      // URL（末尾ピリオドなし）
+      // URL
       if (url) {
         htmlParts.push(url);
         plainParts.push(url);
@@ -247,12 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
         htmlParts.push(`(${year}). `);
         plainParts.push(`(${year}). `);
       }
-      // 論文タイトルは「立体」
       if (title) {
         htmlParts.push(`${title}. `);
         plainParts.push(`${title}. `);
       }
-      // 学術誌名と巻数は「斜体」（ガイドp.29準拠）
       if (jName) {
         htmlParts.push(`<em>${jName}</em>`);
         plainParts.push(jName);
@@ -308,14 +326,15 @@ document.addEventListener('DOMContentLoaded', () => {
     citationPreview.innerHTML = finalHtml;
     citationPreview.dataset.plain = finalPlain;
 
-    narrativePreview.textContent = `${inTextAuthor}(${inTextYear})`;
-    parentheticalPreview.textContent = `(${inTextAuthor}, ${inTextYear})`;
+    // 本文中引用
+    narrativePreview.textContent = `${inTextAuthor}(${inTextYear || '年'})`;
+    parentheticalPreview.textContent = `(${inTextAuthor}, ${inTextYear || '年'})`;
   }
 
-  // フォーム全体のinput監視（リアルタイム反映）
+  // リアルタイム反映
   document.querySelector('.form-panel').addEventListener('input', generateCitation);
 
-  // ✦ 「作成する」ボタンを押したときの挙動
+  // 作成ボタン
   if (btnGenerate) {
     btnGenerate.addEventListener('click', () => {
       generateCitation();
@@ -323,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ─── コピー機能（Word / Google Docs 貼り付け対応） ───
+  // ─── コピー機能 ───
   function setCopySuccess(btn) {
     const originalText = btn.textContent;
     btn.textContent = '✓ コピー完了';
