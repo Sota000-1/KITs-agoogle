@@ -302,4 +302,65 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    const finalHtml = htmlParts.join('').trim
+    const finalHtml = htmlParts.join('').trim() || '（入力して「作成」を押すと、ここにガイド通りの書式が生成されます）';
+    const finalPlain = plainParts.join('').trim();
+
+    citationPreview.innerHTML = finalHtml;
+    citationPreview.dataset.plain = finalPlain;
+
+    narrativePreview.textContent = `${inTextAuthor}(${inTextYear})`;
+    parentheticalPreview.textContent = `(${inTextAuthor}, ${inTextYear})`;
+  }
+
+  // フォーム全体のinput監視（リアルタイム反映）
+  document.querySelector('.form-panel').addEventListener('input', generateCitation);
+
+  // ✦ 「作成する」ボタンを押したときの挙動
+  if (btnGenerate) {
+    btnGenerate.addEventListener('click', () => {
+      generateCitation();
+      resultSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  // ─── コピー機能（Word / Google Docs 貼り付け対応） ───
+  function setCopySuccess(btn) {
+    const originalText = btn.textContent;
+    btn.textContent = '✓ コピー完了';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.classList.remove('copied');
+    }, 1500);
+  }
+
+  copyRichBtn.addEventListener('click', async () => {
+    const htmlData = citationPreview.innerHTML;
+    const plainData = citationPreview.dataset.plain || citationPreview.innerText;
+    try {
+      const blobHtml = new Blob([htmlData], { type: 'text/html' });
+      const blobText = new Blob([plainData], { type: 'text/plain' });
+      const data = [new ClipboardItem({ 'text/html': blobHtml, 'text/plain': blobText })];
+      await navigator.clipboard.write(data);
+      setCopySuccess(copyRichBtn);
+    } catch (e) {
+      navigator.clipboard.writeText(plainData);
+      setCopySuccess(copyRichBtn);
+    }
+  });
+
+  copyPlainBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(citationPreview.dataset.plain || citationPreview.innerText);
+    setCopySuccess(copyPlainBtn);
+  });
+
+  copyNarrativeBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(narrativePreview.textContent);
+    setCopySuccess(copyNarrativeBtn);
+  });
+
+  copyParentheticalBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(parentheticalPreview.textContent);
+    setCopySuccess(copyParentheticalBtn);
+  });
+});
