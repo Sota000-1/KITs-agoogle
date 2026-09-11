@@ -57,15 +57,15 @@
   <main class="container">
     <div class="apa-container">
 
-      <!-- ヘッダータイトル -->
+      <!-- タイトル -->
       <div>
-        <h1 style="font-size: 1.8rem; font-weight: 200; margin-bottom: 6px;">APA Style Editor</h1>
+        <h1 style="font-size: 1.85rem; font-weight: 200; margin-bottom: 6px;">APA Style Editor</h1>
         <p style="font-size: 0.85rem; color: var(--text-sub); font-weight: 300;">
-          札幌開成中等教育学校レポート作成ガイド（APA第7版・日本心理学会基準）準拠
+          論文・レポート作成ガイド（APA第7版・日本心理学会基準）準拠
         </p>
       </div>
 
-      <!-- メディア種別セレクター -->
+      <!-- メディア種別セレクター（完全に独立した4つのモード） -->
       <div class="media-tabs">
         <button class="media-tab active" data-media="web">🌐 Webページ</button>
         <button class="media-tab" data-media="book">📚 書籍</button>
@@ -74,121 +74,217 @@
       </div>
 
       <!-- ─── 入力フォームパネル ─── -->
-      <form class="form-panel" id="citationForm" onsubmit="return false;">
+      <div class="form-panel">
 
-        <!-- 著者名 -->
-        <div class="form-row">
-          <label class="form-label" for="authorInput">
-            <span>著者名 / 発行組織</span>
-            <span class="hint">日本語は姓名フルネーム（例: 山田剛史・林創）/ 英語は Surname, I.</span>
-          </label>
-          <input type="text" id="authorInput" class="form-input" placeholder="例: 松本創 または 総務省統計局">
-          <label class="form-checkbox-label">
-            <input type="checkbox" id="authorMissing"> 著者不明（記事タイトルから開始）
-          </label>
-        </div>
-
-        <!-- 日付 / 出版年 -->
-        <div class="form-grid-3" id="dateSection">
+        <!-- ==================== 1. Webページ用フォーム ==================== -->
+        <div class="media-form-group" id="formWeb">
+          <!-- URL自動取得バー -->
           <div class="form-row">
-            <label class="form-label" for="yearInput">出版年 / 更新年</label>
-            <input type="number" id="yearInput" class="form-input" placeholder="2024" min="1900" max="2099">
+            <label class="form-label">
+              <span>URL（Webアドレス）</span>
+              <span class="hint">入力して自動取得できます</span>
+            </label>
+            <div style="display: flex; gap: 8px;">
+              <input type="url" id="webUrl" class="form-input" style="flex: 1;" placeholder="https://toyokeizai.net/articles/..." />
+              <button type="button" class="btn-fetch" id="btnAutoFetch">✨ URLから自動取得</button>
+            </div>
+            <span id="fetchStatus" class="fetch-status-msg"></span>
           </div>
-          <div class="form-row" id="monthCol">
-            <label class="form-label" for="monthSelect">月（Web/記事用）</label>
-            <select id="monthSelect" class="form-select">
-              <option value="">なし</option>
-              <option value="January">1月 (January)</option>
-              <option value="February">2月 (February)</option>
-              <option value="March">3月 (March)</option>
-              <option value="April">4月 (April)</option>
-              <option value="May">5月 (May)</option>
-              <option value="June">6月 (June)</option>
-              <option value="July">7月 (July)</option>
-              <option value="August">8月 (August)</option>
-              <option value="September">9月 (September)</option>
-              <option value="October">10月 (October)</option>
-              <option value="November">11月 (November)</option>
-              <option value="December">12月 (December)</option>
-            </select>
-          </div>
-          <div class="form-row" id="dayCol">
-            <label class="form-label" for="dayInput">日（Web/記事用）</label>
-            <input type="number" id="dayInput" class="form-input" placeholder="14" min="1" max="31">
-          </div>
-        </div>
-        <div style="margin-top: -12px;">
-          <label class="form-checkbox-label">
-            <input type="checkbox" id="dateUnknown"> 日付なし (n.d.)
-          </label>
-        </div>
 
-        <!-- タイトル -->
-        <div class="form-row">
-          <label class="form-label" for="titleInput">
-            <span id="titleLabelText">タイトル</span>
-            <span class="hint">「」や『』は付けない</span>
-          </label>
-          <input type="text" id="titleInput" class="form-input" placeholder="例: 「役に立つ学問」が事前にはわからない根本理由">
-        </div>
+          <!-- 記事タイトルとWebサイト名の明確な区別ガイド -->
+          <div class="form-row">
+            <label class="form-label">
+              <span style="color: var(--text-main); font-weight: 500;">① 記事タイトル（Webページタイトル）</span>
+              <span class="hint">「」はつけない</span>
+            </label>
+            <input type="text" id="webTitle" class="form-input" placeholder="例: 「役に立つ学問」が事前にはわからない根本理由" />
+            <div class="field-explanation">
+              💡 <strong>開いたページの上部にある記事そのものの見出し・題名</strong>を入力します。
+            </div>
+          </div>
 
-        <!-- ソース / 出典情報（メディアごとに切り替え） -->
-        <div class="form-grid-2" id="sourceSection">
-          <div class="form-row" id="sourceCol1">
-            <label class="form-label" id="sourceLabel1">Webサイト名 / 掲載誌</label>
-            <input type="text" id="sourceInput1" class="form-input" placeholder="例: 東洋経済 ONLINE">
-            <label class="form-checkbox-label" id="authorSameSiteLabel">
-              <input type="checkbox" id="authorSameSite"> 著者とサイト名が同一（サイト名を省略）
+          <div class="form-row">
+            <label class="form-label">
+              <span style="color: var(--text-main); font-weight: 500;">② Webサイトのタイトル（サイト名）</span>
+            </label>
+            <input type="text" id="webSiteName" class="form-input" placeholder="例: 東洋経済 ONLINE" />
+            <div class="field-explanation">
+              💡 <strong>サイトのヘッダーロゴや検索結果に出るメディア全体の名前</strong>（例: NHK NEWS WEB、総務省統計局など）を入力します。
+            </div>
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="webAuthorSameSite" /> 著者名とサイト名が同一（サイト名を省略）
             </label>
           </div>
 
-          <div class="form-row" id="sourceCol2">
-            <label class="form-label" id="sourceLabel2">巻数・ページ等</label>
-            <input type="text" id="sourceInput2" class="form-input" placeholder="例: 51, 31-43">
+          <!-- 著者名 -->
+          <div class="form-row">
+            <label class="form-label">
+              <span>著者名 / 執筆組織名</span>
+              <span class="hint">日本語フルネーム（例: 松本創）/ 組織名（例: 総務省統計局）</span>
+            </label>
+            <input type="text" id="webAuthor" class="form-input" placeholder="例: 松本創" />
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="webAuthorMissing" /> 著者名が見つからない（記事タイトルから開始）
+            </label>
+          </div>
+
+          <!-- 更新日 -->
+          <div class="form-row">
+            <label class="form-label">記事の更新年月日（わかる範囲で詳細に）</label>
+            <div class="form-grid-3">
+              <input type="number" id="webYear" class="form-input" placeholder="年 (例: 2019)" min="1900" max="2099" />
+              <select id="webMonth" class="form-select">
+                <option value="">月なし</option>
+                <option value="January">1月 (January)</option>
+                <option value="February">2月 (February)</option>
+                <option value="March">3月 (March)</option>
+                <option value="April">4月 (April)</option>
+                <option value="May">5月 (May)</option>
+                <option value="June">6月 (June)</option>
+                <option value="July">7月 (July)</option>
+                <option value="August">8月 (August)</option>
+                <option value="September">9月 (September)</option>
+                <option value="October">10月 (October)</option>
+                <option value="November">11月 (November)</option>
+                <option value="December">12月 (December)</option>
+              </select>
+              <input type="number" id="webDay" class="form-input" placeholder="日 (例: 14)" min="1" max="31" />
+            </div>
+            <label class="form-checkbox-label">
+              <input type="checkbox" id="webDateUnknown" /> 日付の記載がない (n.d.)
+            </label>
+          </div>
+
+          <!-- 検索日（Retrieved） -->
+          <div class="form-row">
+            <label class="form-label">
+              <span>閲覧日・検索日（Retrieved date）</span>
+              <button type="button" class="btn-mini" id="btnTodayRetrieved">今日の日付を入力</button>
+            </label>
+            <div class="form-grid-3">
+              <select id="retrievedMonth" class="form-select"></select>
+              <input type="number" id="retrievedDay" class="form-input" placeholder="日" />
+              <input type="number" id="retrievedYear" class="form-input" placeholder="年" />
+            </div>
           </div>
         </div>
 
-        <!-- URL / DOI -->
-        <div class="form-row" id="urlSection">
-          <label class="form-label" for="urlInput">
-            <span>URL または DOI</span>
-            <span class="hint">末尾にピリオドはつけない</span>
-          </label>
-          <input type="text" id="urlInput" class="form-input" placeholder="https://...">
-        </div>
-
-        <!-- 検索日（Web用 Retrieved） -->
-        <div class="form-row" id="retrievedSection">
-          <label class="form-label">
-            <span>検索日・閲覧日（Retrieved date）</span>
-            <button class="btn-copy" id="btnTodayRetrieved" style="padding: 2px 8px; font-size: 0.7rem;">今日の日付を入力</button>
-          </label>
-          <div class="form-grid-3">
-            <select id="retrievedMonth" class="form-select">
-              <option value="January">January</option>
-              <option value="February">February</option>
-              <option value="March">March</option>
-              <option value="April">April</option>
-              <option value="May">May</option>
-              <option value="June">June</option>
-              <option value="July">July</option>
-              <option value="August">August</option>
-              <option value="September">September</option>
-              <option value="October">October</option>
-              <option value="November">November</option>
-              <option value="December">December</option>
-            </select>
-            <input type="number" id="retrievedDay" class="form-input" placeholder="日 (例: 24)" min="1" max="31">
-            <input type="number" id="retrievedYear" class="form-input" placeholder="年 (例: 2024)" min="1900" max="2099">
+        <!-- ==================== 2. 書籍用フォーム ==================== -->
+        <div class="media-form-group" id="formBook" style="display: none;">
+          <div class="form-row">
+            <label class="form-label">書籍タイトル</label>
+            <input type="text" id="bookTitle" class="form-input" placeholder="例: 大学生のためのリサーチリテラシー入門－研究のための8つの力－" />
+          </div>
+          <div class="form-row">
+            <label class="form-label">
+              <span>著者名</span>
+              <span class="hint">日本語はフルネームで連名は「・」、英語は「Surname, Initial」</span>
+            </label>
+            <input type="text" id="bookAuthor" class="form-input" placeholder="例: 山田剛史・林創" />
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">出版年（西暦）</label>
+              <input type="number" id="bookYear" class="form-input" placeholder="例: 2011" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">出版社名</label>
+              <input type="text" id="bookPublisher" class="form-input" placeholder="例: ミネルヴァ書房" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">版（初版以外の場合のみ）</label>
+              <input type="text" id="bookEdition" class="form-input" placeholder="例: 第2版 または 3rd ed." />
+            </div>
+            <div class="form-row">
+              <label class="form-label">DOI または URL（電子書籍の場合のみ）</label>
+              <input type="text" id="bookUrl" class="form-input" placeholder="https://doi.org/..." />
+            </div>
           </div>
         </div>
 
-      </form>
+        <!-- ==================== 3. 学術論文用フォーム ==================== -->
+        <div class="media-form-group" id="formJournal" style="display: none;">
+          <div class="form-row">
+            <label class="form-label">
+              <span>論文タイトル</span>
+              <span class="hint">※論文名は斜体にしません</span>
+            </label>
+            <input type="text" id="journalArticleTitle" class="form-input" placeholder="例: 空間の印象評価に及ぼすBGMのジャンルと照明の光色の相互作用的影響" />
+          </div>
+          <div class="form-row">
+            <label class="form-label">著者名</label>
+            <input type="text" id="journalAuthor" class="form-input" placeholder="例: 後藤靖宏" />
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">出版年（西暦）</label>
+              <input type="number" id="journalYear" class="form-input" placeholder="例: 2013" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">
+                <span>学術誌名（ジャーナル名）</span>
+                <span class="hint">※斜体で出力されます</span>
+              </label>
+              <input type="text" id="journalName" class="form-input" placeholder="例: 北星学園大学文学部北星論集" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">巻数（数字のみ）</label>
+              <input type="text" id="journalVolume" class="form-input" placeholder="例: 51" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">ページ番号範囲</label>
+              <input type="text" id="journalPages" class="form-input" placeholder="例: 31-43" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">DOI または URL</label>
+            <input type="text" id="journalDoi" class="form-input" placeholder="https://doi.org/..." />
+          </div>
+        </div>
+
+        <!-- ==================== 4. 生成AI引用用フォーム ==================== -->
+        <div class="media-form-group" id="formAi" style="display: none;">
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">AI開発企業名（著者）</label>
+              <input type="text" id="aiAuthor" class="form-input" value="OpenAI" placeholder="OpenAI, Anthropic, Google等" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">利用年（西暦）</label>
+              <input type="number" id="aiYear" class="form-input" placeholder="例: 2024" />
+            </div>
+          </div>
+          <div class="form-grid-2">
+            <div class="form-row">
+              <label class="form-label">モデル名 ＆ バージョン情報</label>
+              <input type="text" id="aiModel" class="form-input" placeholder="例: ChatGPT (2024年3月版)" />
+            </div>
+            <div class="form-row">
+              <label class="form-label">モデル説明タグ</label>
+              <input type="text" id="aiDesc" class="form-input" value="Large language model" placeholder="Large language model / 大規模言語モデル" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label class="form-label">ツールのURL</label>
+            <input type="text" id="aiUrl" class="form-input" value="https://chatgpt.com" />
+          </div>
+        </div>
+
+        <!-- ✦ 明示的な作成ボタン ✦ -->
+        <div style="margin-top: 10px; display: flex; justify-content: flex-end;">
+          <button type="button" class="btn-create" id="btnGenerate">✦ APA引用を作成する</button>
+        </div>
+
+      </div>
 
       <!-- ─── 出力・生成結果パネル ─── -->
-      <div class="result-section">
+      <div class="result-section" id="resultSection">
 
-        <!-- 1. 引用文献リスト用（参考文献一覧） -->
+        <!-- 1. 引用文献リスト用 -->
         <div class="result-card">
           <div class="result-header">
             <span class="result-title">✦ 引用文献リストの書式（参考文献一覧）</span>
@@ -197,27 +293,26 @@
               <button class="btn-copy" id="copyPlainBtn">テキストコピー</button>
             </div>
           </div>
-          <!-- ぶら下げインデント表示プレビュー -->
           <div class="citation-box" id="citationPreview">
-            （入力するとここに正しいAPAフォーマットが生成されます）
+            （入力して「作成」を押すと、ここにガイド通りの書式が生成されます）
           </div>
         </div>
 
-        <!-- 2. 本文中引用（ナラティブ引用 ＆ カッコ引用） -->
+        <!-- 2. 本文中引用 -->
         <div class="result-card">
           <div class="result-header">
             <span class="result-title">✦ 本文中の引用（In-text Citation）</span>
           </div>
           <div class="intext-grid">
             <div class="intext-box">
-              <span class="intext-type">【ナラティブ引用】（主語・文中）</span>
+              <span class="intext-type">【ナラティブ引用】（主語として文中に組み込む場合）</span>
               <div class="intext-text">
                 <span id="narrativePreview">著者(年)</span>
                 <button class="btn-copy" id="copyNarrativeBtn">コピー</button>
               </div>
             </div>
             <div class="intext-box">
-              <span class="intext-type">【カッコ引用】（文末）</span>
+              <span class="intext-type">【カッコ引用】（文末で根拠を示す場合）</span>
               <div class="intext-text">
                 <span id="parentheticalPreview">(著者, 年)</span>
                 <button class="btn-copy" id="copyParentheticalBtn">コピー</button>
