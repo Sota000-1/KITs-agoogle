@@ -16,13 +16,11 @@
       if (savedTheme === 'light') document.documentElement.classList.add('light');
     })();
   </script>
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/navigation.css">
 </head>
-<body>
-
-  <div class="spotlight-grid"></div>
-
-  <header class="header">
-    <button class="menu-btn" aria-label="Menu">
+<body class="info-page"><a class="skip-link" href="#main">本文へ移動</a>  <header class="header">
+    <button class="menu-btn" aria-label="メニューを開く">
       <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
         <line x1="2" y1="6" x2="22" y2="6"></line>
         <line x1="2" y1="12" x2="22" y2="12"></line>
@@ -31,12 +29,11 @@
     </button>
 
     <nav class="main-nav">
-      <a href="index.html" class="nav-link">Top</a>
       <a href="index.html" class="nav-link">Tools</a>
       <a href="about.html" class="nav-link active">About</a>
-      <a href="#" class="nav-link">News</a>
-      <a href="#" class="nav-link">Link</a>
-      <a href="#" class="nav-link">Contact</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="links.html" class="nav-link">Link</a>
+      <a href="contact.html" class="nav-link">Contact</a>
     </nav>
 
     <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
@@ -53,148 +50,26 @@
       </svg>
     </button>
   </header>
-
-  <main class="container">
-    <div class="hud-bar">
-      <div class="hud-group">
-        <span class="hud-dot"></span>
-        <span>SYS.STATUS: OPERATIONAL</span>
-      </div>
-      <div class="hud-group">
-        <span>VIEWPORT: <span id="viewportDim">000x000</span></span>
-        <span>•</span>
-        <span id="liveClock">00:00:00.000 JST</span>
-      </div>
-    </div>
-
-    <!-- 01: Mission -->
-    <section class="section">
-      <div class="section-header">
-        <h1 class="section-title">Mission</h1>
-        <div class="section-line"></div>
-        <span class="section-tag">01 / PHILOSOPHY</span>
-      </div>
-
-      <p class="hero-lead">
-        電子機器の使用促進と時間の有効活用で、<br>
-        <span class="highlight">青少年の成長と社会の発展を切り拓く。</span>
-      </p>
-      <p class="hero-sub">
-        KITs（kits-tools.net）は、青少年の学習に携わるすべての人に対して、時間の有効活用のための電子機器の使用促進や情報化社会への教育の促進に関する事業を行い、青少年の成長を通じて社会全体の発展に寄与することを目指しています。学校などのフィルタリングや制限環境下でも、レポート作成・数理探究・時間管理といった「真に必要な学びのツール」を誰でも即座に使えるプラットフォームを提供しています。
-      </p>
-    </section>
-
-    <!-- 02: Core Values -->
-    <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">Core Values</h2>
-        <div class="section-line"></div>
-        <span class="section-tag">02 / PILLARS</span>
-      </div>
-
-      <div class="concept-grid">
-        <div class="corner-card tilt-card">
-          <div class="card-meta">
-            <span>PILLAR 01</span>
-            <span>TIME EFFICIENCY</span>
-          </div>
-          <div class="card-title">学習時間の有効活用</div>
-          <p class="card-desc">
-            APA引用作成や文字数集計、縦書き編集など、学術執筆や日々の作業にかかる不要な摩擦を削ぎ落とし、探究そのものに没頭できる時間を生み出します。
-          </p>
-        </div>
-
-        <div class="corner-card tilt-card">
-          <div class="card-meta">
-            <span>PILLAR 02</span>
-            <span>UNRESTRICTED</span>
-          </div>
-          <div class="card-title">制限を超えたアクセス</div>
-          <p class="card-desc">
-            教育現場のネットワーク制限や端末差に左右されず、誰もがブラウザ1つで軽量かつ安全にアクセスできる学習インフラを構築しています。
-          </p>
-        </div>
-
-        <div class="corner-card tilt-card">
-          <div class="card-meta">
-            <span>PILLAR 03</span>
-            <span>DIGITAL LITERACY</span>
-          </div>
-          <div class="card-title">情報化社会の自律</div>
-          <p class="card-desc">
-            単なる消費者としてではなく、テクノロジーの特性を理解して主体的に道具を使いこなす力を青少年とともに育みます。
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 03: Organization -->
-    <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">Organization</h2>
-        <div class="section-line"></div>
-        <span class="section-tag">03 / PROJECT</span>
-      </div>
-
-      <div class="creator-plate">
-        <span class="cross-mark cross-tl">+</span>
-        <span class="cross-mark cross-tr">+</span>
-        <span class="cross-mark cross-bl">+</span>
-        <span class="cross-mark cross-br">+</span>
-
-        <div class="creator-symbol">
-          <svg viewBox="0 0 100 100">
-            <polygon points="50,14 86,78 14,78" fill="none" class="svg-main-stroke" stroke-width="2"/>
-            <circle cx="50" cy="54" r="16" fill="none" class="svg-muted-stroke" stroke-width="1.5"/>
-            <circle cx="50" cy="54" r="3.5" class="svg-main-fill"/>
-          </svg>
-        </div>
-
-        <div class="creator-details">
-          <span class="creator-tag">STUDENT PROJECT / NPO</span>
-          <h3 class="creator-name">KITs (Kaisei Information Tools)</h3>
-          <p class="creator-bio">
-            中高生の視点から「教育現場に本当に必要な道具」を追求する開発チーム。学習・執筆・数理ツールをゼロから開発し、オープンで持続可能な教育支援活動を展開しています。
-          </p>
-          <div class="creator-links">
-            <a href="https://www.kits-tools.net" target="_blank" class="creator-link">kits-tools.net ↗</a>
-            <a href="https://github.com/Kaisei-Information-Tools" target="_blank" class="creator-link">GitHub ↗</a>
-            <a href="https://forms.gle" target="_blank" class="creator-link">Feedback / 要望 ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 04: System Specs -->
-    <section class="section">
-      <div class="section-header">
-        <h2 class="section-title">System Specs</h2>
-        <div class="section-line"></div>
-        <span class="section-tag">04 / SPECIFICATIONS</span>
-      </div>
-
-      <div class="spec-grid">
-        <div class="spec-item">
-          <span class="spec-key">ARCHITECTURE</span>
-          <span class="spec-val">Vanilla Web Standards / Zero-Dependency（制限回線でも超高速起動）</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-key">DATA PRIVACY</span>
-          <span class="spec-val">完全クライアントサイド実行（入力データ・文章は外部送信されません）</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-key">CUSTOM ENGINE</span>
-          <span class="spec-val">LocalStorage によるテーマ同期および並び替え配置の自動保持</span>
-        </div>
-        <div class="spec-item">
-          <span class="spec-key">TYPOGRAPHY</span>
-          <span class="spec-val">Inter, JetBrains Mono, Noto Sans JP</span>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script src="js/theme.js"></script>
-  <script src="js/about.js"></script>
-</body>
-</html>
+<main id="main" class="page-wrap"><div class="page-label"><span>KITs / ABOUT</span><span>便利なマナビを、min-naに。</span></div>
+<section class="page-hero"><p class="eyebrow">ABOUT</p><h1>学びのそばに、<br>ちょうどいい<span class="accent">道具</span>を。</h1><p class="intro">小さな「困った」を、つくるきっかけに。<br>KITsは、テクノロジーで日々の学びを支えるプロジェクトです。</p>
+</section><div class="hero-art" aria-hidden="true"><span class="art-caption">IDEAS INTO TOOLS</span><div class="art-letter">K<span>i</span>T<span>s</span><i class="art-dot"></i></div><div class="art-bottom"><span>LEARN.</span><span>MAKE.</span><span>SHARE. ↗</span></div></div>
+<section class="editorial" id="mission"><div><p class="eyebrow">01 / OUR MISSION</p><h2>学ぶ時間を、<br>もっと豊かに。</h2></div><div class="prose"><p>私たちはこの活動を通して、学習に携わる「min-na」の様々な「マナビ」がより「便利に」なることを願っています。</p><p>時間の有効活用のための電子機器の使用促進や、情報化社会への教育の促進を通して、青少年の成長と社会全体の発展に寄与することを目指しています。</p></div>
+</section>
+<section class="activities" id="activities"><div class="section-top"><p class="eyebrow">02 / WHAT WE DO</p><span>私たちの活動</span></div><a class="activity" href="index.html"><span class="activity-num">01</span><div><h2>学びに使えるツールをつくる。</h2><p>時間管理からレポート作成まで。学校生活の中で必要になった道具を、自分たちの手で開発・公開しています。</p><span class="small-link">Toolsをひらく ↗</span></div><span class="activity-icon">＋</span></a><a class="activity" href="contact.html"><span class="activity-num">02</span><div><h2>「つくりたい」を、一緒にかたちに。</h2><p>Webサイトの制作や開発のサポートを通じて、アイデアを実現するお手伝いをしています。</p><span class="small-link">相談する ↗</span></div><span class="activity-icon">↗</span></a>
+</section>
+<section class="editorial" id="organization"><div><p class="eyebrow">03 / ORGANIZATION</p><h2>私たちについて</h2></div><div>
+<dl class="org-list"><div><dt>名称</dt><dd>KITs</dd></div><div><dt>英語表記</dt><dd>Kaisei Information Tools</dd></div><div><dt>活動</dt><dd>学習支援ツールの開発・公開<br>Webサイト制作・開発サポート</dd></div>
+</dl><a class="text-link" href="https://www.kits-tools.net/about.html" target="_blank" rel="noopener noreferrer">法人に関する最新情報は運用中サイトへ ↗</a></div>
+</section>
+<section class="cta"><p class="eyebrow">LET’S MAKE LEARNING BETTER.</p><h2>あなたの「こんなの欲しい」から。</h2><a class="pill" href="contact.html">声を届ける <span>↗</span></a>
+</section>
+<footer class="site-footer"><a class="wordmark" href="index.html">KITs<span>.</span></a><p>便利なマナビを、min-naに。</p><a href="contact.html">お問い合わせ ↗</a><span>Kaisei Information Tools</span>
+</footer>
+</main>
+<script src="js/theme.js">
+</script>
+<script src="js/navigation.js">
+</script>
+<script src="js/pages.js">
+</script>
+</body></html>

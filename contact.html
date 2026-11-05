@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | KITs (kits-tools.net)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('tools_theme');
+      if (savedTheme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/navigation.css">
+</head>
+<body class="info-page"><a class="skip-link" href="#main">本文へ移動</a>  <header class="header">
+    <button class="menu-btn" aria-label="メニューを開く">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
+        <line x1="2" y1="6" x2="22" y2="6"></line>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <line x1="2" y1="18" x2="22" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Tools</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="news.html" class="nav-link">News</a>
+      <a href="links.html" class="nav-link">Link</a>
+      <a href="contact.html" class="nav-link active">Contact</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3.5"></line>
+        <line x1="12" y1="20.5" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="6" y2="6"></line>
+        <line x1="18" y1="18" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3.5" y2="12"></line>
+        <line x1="20.5" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="6" y2="18"></line>
+        <line x1="18" y1="6" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </header>
+<main id="main" class="page-wrap"><div class="page-label"><span>KITs / CONTACT</span><span>便利なマナビを、min-naに。</span></div>
+<section class="page-hero"><p class="eyebrow">CONTACT</p><h1>そのひと声が、<br>次の<span class="accent">きっかけ</span>に。</h1><p class="intro">不具合の報告、欲しい機能、制作のご相談。<br>気づいたことを、気軽に聞かせてください。</p>
+</section><div class="contact-layout">
+<aside><p class="eyebrow">GET IN TOUCH</p><h2>どんなことでも、<br>ここから。</h2><p>内容に合った項目を選んで、<br>伝えたいことを整理できます。</p><div class="contact-aside-note"><span>↗</span><p>お問い合わせの送信は、<br>運用中サイトで受け付けています。</p></div>
+</aside>
+<section class="contact-panel"><h2>お問い合わせの準備</h2><p class="form-description">この画面からは送信されません。内容をコピーして、公式のお問い合わせフォームに貼り付けてください。</p>
+<form id="contactDraft"><label for="topic">お問い合わせの種類</label><select id="topic" ><option>ツールの不具合</option><option>ツール・機能のリクエスト</option><option>Web制作・開発の相談</option><option>活動への参加・協力</option><option>その他</option></select><label for="message">お問い合わせ内容 <span>必須</span></label><textarea id="message" required rows="7" placeholder="使用したツール名や、気づいたことなどをお書きください。"></textarea><p class="form-hint">個人情報やパスワードなどは記入しないでください。入力内容は保存されません。</p><button class="pill" type="submit" disabled>内容をコピーする <span>＋</span></button><p id="copyStatus" role="status" aria-live="polite"></p>
+</form><a class="official-contact" href="https://www.kits-tools.net/contact.html" target="_blank" rel="noopener noreferrer">公式のお問い合わせフォームへ <span>↗</span></a>
+</section></div>
+<section class="faq"><div class="section-top"><p class="eyebrow">BEFORE YOU CONTACT</p><span>お問い合わせの前に</span></div>
+<details><summary>不具合の報告には、何を書けばいい？</summary><p>ツール名、使っていた端末・ブラウザ、操作の手順、表示されたエラーを教えていただくと、状況を確認しやすくなります。</p>
+</details>
+<details><summary>欲しいツールや機能をリクエストできますか？</summary><p>はい。どんな場面で使いたいか、今どんなことに困っているかも、ぜひお聞かせください。</p>
+</details>
+<details><summary>この仮サイトから送信されますか？</summary><p>送信されません。上の画面は内容の準備用です。実際の送信は、公式のお問い合わせフォームからお願いします。</p>
+</details>
+</section>
+<footer class="site-footer"><a class="wordmark" href="index.html">KITs<span>.</span></a><p>便利なマナビを、min-naに。</p><a href="contact.html">お問い合わせ ↗</a><span>Kaisei Information Tools</span>
+</footer>
+</main>
+<script src="js/theme.js">
+</script>
+<script src="js/navigation.js">
+</script>
+<script src="js/pages.js">
+</script>
+</body></html>
