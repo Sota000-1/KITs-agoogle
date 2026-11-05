@@ -1,10 +1,10 @@
 .info-page {
-  --page-bg:#292321; --panel:#362d2a; --ink:#fff1e8; --muted:#d7c1b7;
-  --rule:#594842; --accent:#f4bfa8; --on-accent:#39251e;
-  --peach:#4b342d; --on-peach:#ffe6d9;
+  --page-bg:#202b35; --panel:#293845; --ink:#eff8ff; --muted:#bbcedd;
+  --rule:#465d70; --accent:#abdafa; --on-accent:#183549;
+  --sky:#314e65; --on-sky:#e3f3ff;
   background:var(--page-bg); color:var(--ink); padding-bottom:0;
 }
-.light .info-page { --page-bg:#fff8f3; --panel:#fffdf9; --ink:#392a24; --muted:#705850; --rule:#e9d2c5; --accent:#914c38; --on-accent:#fff8f3; --peach:#f8dacb; --on-peach:#512e24; }
+.light .info-page { --page-bg:#f2f9fd; --panel:#fbfdff; --ink:#203848; --muted:#4a6577; --rule:#cbdfea; --accent:#235b7c; --on-accent:#f2f9fd; --sky:#d8edf9; --on-sky:#244a63; }
 .info-page a { color:inherit; }
 .info-page :focus-visible { outline:2px solid var(--accent); outline-offset:4px; }
 .page-wrap { width:min(1120px, calc(100% - 72px)); margin:auto; }
@@ -17,16 +17,7 @@
 .page-hero h1 { font-size:clamp(2rem,7.15vw,6.25rem); line-height:1.14; letter-spacing:-.075em; font-weight:700; margin:.2em 0 .26em; text-wrap:balance; }
 .accent,.wordmark span { color:var(--accent); }
 .intro,.prose,.activity p,.resource-card p,.contact-layout aside p,.faq details p { color:var(--muted); line-height:1.9; font-size:clamp(.9rem,1.5vw,1.06rem); }
-.about-logo {
-  float:right;
-  width:clamp(76px,11vw,112px);
-  height:auto;
-  margin:0 0 12px 18px;
-  padding:10px;
-  background:#fff8f3;
-  border-radius:22%;
-}
-.about-hero { display:flow-root; border-bottom:1px solid var(--rule); }
+.about-hero { border-bottom:1px solid var(--rule); }
 .editorial { display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,72px); padding:clamp(54px,8vw,100px) 0; }
 .editorial h2,.cta h2,.contact-layout aside h2 { font-size:clamp(1.5rem,4vw,3rem); letter-spacing:-.055em; margin-top:.3em; line-height:1.25; }
 .prose p + p { margin-top:1em; }
@@ -50,13 +41,13 @@
 .notice { display:flex; gap:12px; align-items:baseline; padding:18px 22px; margin-bottom:20px; border:1px solid var(--rule); border-radius:12px; font-size:.88rem; }
 .notice p { color:var(--muted); margin-top:.25em; }
 .notice-dot { flex:0 0 7px; height:7px; background:var(--accent); border-radius:50%; }
-.featured-news { display:block; position:relative; isolation:isolate; overflow:hidden; color:var(--on-peach)!important; background:var(--peach); border-radius:20px; padding:clamp(25px,5vw,60px); text-decoration:none; margin-bottom:48px; }
+.featured-news { display:block; position:relative; isolation:isolate; overflow:hidden; color:var(--on-sky)!important; background:var(--sky); border-radius:20px; padding:clamp(25px,5vw,60px); text-decoration:none; margin-bottom:48px; }
 .featured-news:hover .pill { opacity:.8; }
 .featured-news h2 { font-size:clamp(1.8rem,5.5vw,4.5rem); letter-spacing:-.06em; line-height:1.16; margin:.18em 0 .24em; }
 .featured-news p:not(.eyebrow) { max-width:36ch; font-size:.92rem; line-height:1.65; }
 .resource-card { padding:clamp(14px,4vw,34px); margin-top:18px; background:var(--panel); border:1px solid var(--rule); border-radius:18px; }
 .resource-card:hover,.official-contact:hover { border-color:var(--accent); }
-.resource-symbol { display:grid; place-items:center; width:clamp(42px,10vw,100px); aspect-ratio:1; border-radius:13px; color:var(--on-peach); background:var(--peach); font-size:clamp(1.4rem,4vw,3.25rem); }
+.resource-symbol { display:grid; place-items:center; width:clamp(42px,10vw,100px); aspect-ratio:1; border-radius:13px; color:var(--on-sky); background:var(--sky); font-size:clamp(1.4rem,4vw,3.25rem); }
 .link-section { margin-top:48px; }
 .link-row h3 { font-size:1.15rem; }
 .link-row p { color:var(--muted); margin-top:.25em; font-size:.87rem; }
@@ -93,7 +84,6 @@
   .site-footer { grid-template-columns:auto 1fr; }
   .site-footer > span { grid-column:auto; }
   .activity-icon { padding:0; }
-  .about-logo { float:none; display:block; margin:0 0 18px; }
 }
 .news-list article { display:grid; grid-template-columns:9rem 1fr; gap:14px; border-bottom:1px solid var(--rule); padding:24px 0; }
 .news-list time { font:500 .85rem 'JetBrains Mono',monospace; color:var(--muted); padding-top:3px; }
