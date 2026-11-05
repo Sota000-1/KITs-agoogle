@@ -21,9 +21,9 @@
   display:grid; place-items:center; place-self:center;
   width:clamp(76px,11vw,128px); aspect-ratio:1;
   border:1px solid #526936; border-radius:24%;
-  background:#1b2312; color:#d5fa85;
+  background:#f7f8f0;
 }
-.art-icon svg { width:67%; }
+.art-icon img { display:block; width:78%; height:auto; }
 .art-bottom { align-self:end; }
 .editorial { display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,72px); padding:clamp(54px,8vw,100px) 0; }
 .editorial h2,.cta h2,.contact-layout aside h2 { font-size:clamp(1.5rem,4vw,3rem); letter-spacing:-.055em; margin-top:.3em; line-height:1.25; }
