@@ -52,7 +52,7 @@
   background: none;
   border: 1px solid var(--sharp-line);
   color: var(--text-sub);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.78rem;
   padding: 6px 12px;
   border-radius: 6px;
@@ -87,7 +87,7 @@
 }
 
 .date-sub {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.9rem;
   color: var(--text-sub);
   letter-spacing: 0.14em;
@@ -104,10 +104,11 @@
 }
 
 .digital-time {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   /* 最小 4.2rem から最大 10.5rem（約168px）へ大幅拡大 */
   font-size: clamp(4.0rem, 13.5vw, 10.5rem);
-  font-weight: 200; /* 極太にならず洗練された細身ウェイト */
+  font-weight: 500;
+  font-variant-numeric: tabular-nums; /* 極太にならず洗練された細身ウェイト */
   line-height: 1;
   letter-spacing: -0.04em;
   display: flex;
@@ -211,7 +212,7 @@
 
 .dial-num {
   position: absolute;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 1.0rem;
   font-weight: 300;
   color: var(--text-sub);

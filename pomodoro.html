@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/time-tools.css">
 
@@ -17,8 +17,10 @@
       if (savedTheme === 'light') document.documentElement.classList.add('light');
     })();
   </script>
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/pastel.css">
 </head>
-<body>
+<body class="tool-detail-page">
 
   <header class="header">
     <button class="menu-btn" aria-label="Menu">
@@ -30,15 +32,14 @@
     </button>
 
     <nav class="main-nav">
-      <a href="index.html" class="nav-link">Top</a>
-      <a href="index.html" class="nav-link active">Tools</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="#" class="nav-link">News</a>
-      <a href="#" class="nav-link">Link</a>
-      <a href="#" class="nav-link">Contact</a>
+      <a href="index.html" class="nav-link active">ツール</a>
+      <a href="about.html" class="nav-link">KITsについて</a>
+      <a href="news.html" class="nav-link">お知らせ</a>
+      <a href="links.html" class="nav-link">リンク集</a>
+      <a href="contact.html" class="nav-link">お問い合わせ</a>
     </nav>
 
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+    <button class="theme-btn" id="themeBtn" aria-label="表示テーマを切り替える">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
         <circle cx="12" cy="12" r="4.5"></circle>
         <line x1="12" y1="1" x2="12" y2="3.5"></line>
@@ -83,9 +84,9 @@
           <circle class="meter-bar color-work" id="pomoBar" cx="100" cy="100" r="88"/>
         </svg>
         <div class="meter-center">
-          <span class="meter-status" id="pomoStatus">FOCUS</span>
+          <span class="meter-status" id="pomoStatus">集中時間</span>
           <span class="meter-time" id="pomoDisplay">25:00</span>
-          <span class="meter-sub" id="pomoCount">SESSION #1</span>
+          <span class="meter-sub" id="pomoCount">1セット目</span>
         </div>
       </div>
 
@@ -100,5 +101,6 @@
 
   <script src="js/theme.js"></script>
   <script src="js/pomodoro.js"></script>
+  <script src="js/navigation.js"></script>
 </body>
 </html>

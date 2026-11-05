@@ -7,7 +7,7 @@
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700&family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
   <script>
@@ -17,8 +17,9 @@
     })();
   </script>
   <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/pastel.css">
 </head>
-<body>
+<body class="tools-page">
 
   <header class="header">
     <button class="menu-btn" aria-label="Menu">
@@ -30,15 +31,14 @@
     </button>
 
     <nav class="main-nav">
-      <a href="index.html" class="nav-link">Top</a>
-      <a href="index.html" class="nav-link active">Tools</a>
-      <a href="about.html" class="nav-link">About</a>
-      <a href="news.html" class="nav-link">News</a>
-      <a href="links.html" class="nav-link">Link</a>
-      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="index.html" class="nav-link active">ツール</a>
+      <a href="about.html" class="nav-link">KITsについて</a>
+      <a href="news.html" class="nav-link">お知らせ</a>
+      <a href="links.html" class="nav-link">リンク集</a>
+      <a href="contact.html" class="nav-link">お問い合わせ</a>
     </nav>
 
-    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+    <button class="theme-btn" id="themeBtn" aria-label="表示テーマを切り替える">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
         <circle cx="12" cy="12" r="4.5"></circle>
         <line x1="12" y1="1" x2="12" y2="3.5"></line>
@@ -56,9 +56,9 @@
 <!-- サブナビゲーション -->
   <div class="sub-nav-wrapper">
     <div class="sub-nav">
-      <button class="sub-link" data-tab="all">All</button>
-      <button class="sub-link active" data-tab="category">Category</button>
-      <button class="sub-link" data-tab="custom">Custom</button>
+      <button class="sub-link" data-tab="all">すべて</button>
+      <button class="sub-link active" data-tab="category">カテゴリ別</button>
+      <button class="sub-link" data-tab="custom">並べ替え</button>
     </div>
 
     <!-- ✦ 時計ウィジェット（ワイド＆画像高度カスタマイズ対応） ✦ -->
@@ -71,7 +71,7 @@
         <button class="banner-btn" id="btnPortalUpload" title="好きな背景画像を設定">🖼 画像</button>
 
         <!-- 画像がある時だけ現れるボタン -->
-        <button class="banner-btn bg-ctrl-btn" id="btnPortalBlur" title="ぼかしのON/OFF" style="display: none;">✨ ぼかし</button>
+        <button class="banner-btn bg-ctrl-btn" id="btnPortalBlur" title="ぼかしの切り替え" style="display: none;">✨ ぼかし</button>
         <button class="banner-btn bg-ctrl-btn" id="btnPortalPos" title="ドラッグで画像位置を移動" style="display: none;">📍 位置</button>
 
         <input type="color" id="portalColorPicker" value="#121214" style="display: none;">
@@ -87,14 +87,12 @@
         <!-- 年月日・曜日 -->
         <div class="banner-date-area">
           <div class="banner-date-main" id="portalDateMain">----年--月--日 (--)</div>
-          <div class="banner-sub-text" id="portalDateSub">----.--.-- ---</div>
         </div>
 
         <!-- デジタル時計 -->
         <div class="banner-time-area">
           <span class="banner-time-main" id="portalTimeMain">00:00</span>
           <span class="banner-time-sec" id="portalTimeSec">:00</span>
-          <span class="banner-time-zone">JST</span>
         </div>
       </div>
     </div>
@@ -110,9 +108,8 @@
     <!-- Time -->
     <section class="section category-section" data-cat="time">
       <div class="section-header">
-        <h2 class="section-title">Time</h2>
+        <h2 class="section-title">時計</h2>
         <div class="section-line"></div>
-        <span class="section-count">4tools</span>
       </div>
 
       <div class="tools-grid" id="grid-time">
@@ -130,7 +127,7 @@
               <circle cx="197.5" cy="620.5" r="4.5" class="svg-main-fill"/>
             </svg>
           </div>
-          <div class="tool-title">Time</div>
+          <div class="tool-title">時計</div>
           <div class="tool-desc">現在時刻を表示します。</div>
         </a>
 
@@ -154,7 +151,7 @@
               </g>
             </svg>
           </div>
-          <div class="tool-title">Timer</div>
+          <div class="tool-title">タイマー</div>
           <div class="tool-desc">時間を計測できます。</div>
         </a>
 
@@ -182,7 +179,7 @@
               <path d="M943.978 573.02L943.115 555.721L928.565 565.118L943.978 573.02ZM887 537.716L886.927 539.215C904.066 540.049 923.358 548.101 935.503 562.642L936.655 561.681L937.806 560.719C925.049 545.445 904.925 537.087 887.073 536.218L887 537.716Z" class="svg-main-fill"/>
             </svg>
           </div>
-          <div class="tool-title">Pomodoro Timer</div>
+          <div class="tool-title">ポモドーロ</div>
           <div class="tool-desc">ポモドーロタイマーです。</div>
         </a>
 
@@ -208,7 +205,7 @@
               </g>
             </svg>
           </div>
-          <div class="tool-title">Stopwatch</div>
+          <div class="tool-title">ストップウォッチ</div>
           <div class="tool-desc">ストップウォッチです。</div>
         </a>
       </div>
@@ -217,9 +214,8 @@
     <!-- STEM -->
     <section class="section category-section" data-cat="stem">
       <div class="section-header">
-        <h2 class="section-title">STEM</h2>
+        <h2 class="section-title">計算・数式</h2>
         <div class="section-line"></div>
-        <span class="section-count">3tools</span>
       </div>
 
       <div class="tools-grid" id="grid-stem">
@@ -240,7 +236,7 @@
               <circle cx="64" cy="71" r="3.8" fill="#e8a838"/>
             </svg>
           </div>
-          <div class="tool-title">Calculator</div>
+          <div class="tool-title">電卓</div>
           <div class="tool-desc">普通の電卓です。</div>
         </a>
 
@@ -281,7 +277,7 @@
               <line x1="812" y1="1164" x2="906" y2="1164" stroke="var(--icon-bg)" stroke-width="6" stroke-linecap="round"/>
             </svg>
           </div>
-          <div class="tool-title">Unit Conversion</div>
+          <div class="tool-title">単位変換</div>
           <div class="tool-desc">様々な単位を変換できます。</div>
         </a>
       </div>
@@ -290,9 +286,8 @@
     <!-- Report -->
     <section class="section category-section" data-cat="report">
       <div class="section-header">
-        <h2 class="section-title">Report</h2>
+        <h2 class="section-title">レポート作成</h2>
         <div class="section-line"></div>
-        <span class="section-count">3tools</span>
       </div>
 
       <div class="tools-grid" id="grid-report">
@@ -307,7 +302,7 @@
               <text x="50" y="62.5" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="1">APA</text>
             </svg>
           </div>
-          <div class="tool-title">APA Style Editor</div>
+          <div class="tool-title">APA引用作成</div>
           <div class="tool-desc">論文形式を自動整形します。</div>
         </a>
 
@@ -323,7 +318,7 @@
               <line x1="34" y1="45" x2="34" y2="62" stroke="#22c55e" stroke-width="3.5" stroke-linecap="square"/>
             </svg>
           </div>
-          <div class="tool-title">Tategaki-Editor</div>
+          <div class="tool-title">縦書きエディタ</div>
           <div class="tool-desc">文章を縦で書けます。</div>
         </a>
 
@@ -358,7 +353,7 @@
               </g>
             </svg>
           </div>
-          <div class="tool-title">Text Counter</div>
+          <div class="tool-title">文字数カウント</div>
           <div class="tool-desc">文字数を数えられます。</div>
         </a>
       </div>

@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModeBreak.classList.toggle('active', !isWorkMode);
 
     pomoBar.className = `meter-bar ${isWorkMode ? 'color-work' : 'color-break'}`;
-    status.textContent = isWorkMode ? 'FOCUS' : 'REST';
+    status.textContent = isWorkMode ? '集中時間' : '休憩時間';
     startBtn.textContent = 'Start';
     
     if (pomoInputMin) pomoInputMin.disabled = false;
@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (isWorkMode) {
         completedSessions++;
-        countEl.textContent = `SESSION #${completedSessions + 1}`;
+        countEl.textContent = `${completedSessions + 1}セット目`;
         setMode(false); // 休憩へ自動移行
       } else {
         setMode(true);  // 作業へ自動移行

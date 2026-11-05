@@ -93,23 +93,24 @@
 }
 
 .meter-status {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.12em;
   color: var(--text-sub);
 }
 
 .meter-time {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   /* ストップウォッチの長い文字列でもはみ出さないサイズ */
   font-size: clamp(2.4rem, 6.8vw, 3.8rem);
-  font-weight: 200;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
 
 .meter-sub {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.82rem;
   color: var(--text-sub);
 }
@@ -163,7 +164,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   background: var(--card-bg);
   border: 1px solid var(--sharp-line);
   padding: 8px 16px;
@@ -182,7 +183,7 @@
   border: none;
   border-bottom: 1px solid var(--sharp-line);
   color: var(--text-main);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 1.2rem;
   text-align: center;
   outline: none;
@@ -201,7 +202,7 @@
   background: none;
   border: 1px solid var(--sharp-line);
   color: var(--text-sub);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.75rem;
   padding: 3px 8px;
   border-radius: 4px;
@@ -227,7 +228,7 @@
 .lap-header {
   display: grid;
   grid-template-columns: 70px 1fr 1fr;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.75rem;
   color: var(--text-sub);
   padding: 4px 12px;
@@ -246,7 +247,7 @@
 .lap-row {
   display: grid;
   grid-template-columns: 70px 1fr 1fr;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
   font-size: 0.88rem;
   color: var(--text-sub);
   padding: 5px 12px;

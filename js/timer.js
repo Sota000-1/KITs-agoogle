@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sec > 0) {
       totalSeconds = sec;
       remainingSeconds = sec;
-      status.textContent = 'READY';
+      status.textContent = '待機中';
       updateDisplay();
     }
   }
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       totalSeconds = current;
       remainingSeconds = current;
       syncInputsFromSeconds(current);
-      status.textContent = 'READY';
+      status.textContent = '待機中';
       updateDisplay();
     });
   });
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
       totalSeconds = 60;
       remainingSeconds = 60;
       syncInputsFromSeconds(60);
-      status.textContent = 'READY';
+      status.textContent = '待機中';
       updateDisplay();
     });
   }
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timerId);
       isRunning = false;
       startBtn.textContent = 'Start';
-      status.textContent = 'COMPLETED';
+      status.textContent = '時間です';
       playAlarm();
     }
   }
@@ -127,14 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
       timerId = setInterval(tick, 1000);
       isRunning = true;
       startBtn.textContent = 'Pause';
-      status.textContent = 'RUNNING';
+      status.textContent = '計測中';
       inputMin.disabled = true;
       inputSec.disabled = true;
     } else {
       clearInterval(timerId);
       isRunning = false;
       startBtn.textContent = 'Resume';
-      status.textContent = 'PAUSED';
+      status.textContent = '一時停止';
       inputMin.disabled = false;
       inputSec.disabled = false;
     }
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isRunning = false;
     remainingSeconds = totalSeconds;
     startBtn.textContent = 'Start';
-    status.textContent = 'READY';
+    status.textContent = '待機中';
     inputMin.disabled = false;
     inputSec.disabled = false;
     updateDisplay();

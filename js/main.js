@@ -1,11 +1,9 @@
 // ─── 1. 横長時計ウィジェットのリアルタイム更新 ───
 const portalDateMain = document.getElementById('portalDateMain');
-const portalDateSub = document.getElementById('portalDateSub');
 const portalTimeMain = document.getElementById('portalTimeMain');
 const portalTimeSec = document.getElementById('portalTimeSec');
 
 const weekdaysJa = ['日', '月', '火', '水', '木', '金', '土'];
-const weekdaysEn = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
 function updatePortalClock() {
   const now = new Date();
@@ -16,9 +14,8 @@ function updatePortalClock() {
   const date = now.getDate();
   const day = now.getDay();
 
-  if (portalDateMain && portalDateSub) {
+  if (portalDateMain) {
     portalDateMain.innerHTML = `${year}年${month}月${date}日 <span class="banner-weekday">(${weekdaysJa[day]})</span>`;
-    portalDateSub.textContent = `${year}.${String(month).padStart(2, '0')}.${String(date).padStart(2, '0')} ${weekdaysEn[day]}`;
   }
 
   // 時間（時:分 と 秒）
@@ -73,7 +70,7 @@ if (portalClockBanner) {
   function applyBlurState() {
     portalClockBanner.classList.toggle('no-blur', !isBlur);
     if (btnPortalBlur) {
-      btnPortalBlur.textContent = isBlur ? '✨ ぼかし:ON' : '✨ ぼかし:OFF';
+      btnPortalBlur.textContent = isBlur ? '✨ ぼかしあり' : '✨ ぼかしなし';
     }
   }
 
@@ -248,7 +245,7 @@ if (portalClockBanner) {
       bgPosY = 50;
       exitPositioningMode();
 
-      portalClockBanner.style.backgroundImage = 'none';
+      portalClockBanner.style.removeProperty('background-image');
       portalClockBanner.classList.remove('has-bg');
       updateBgControlsVisibility(false);
       if (portalBgInput) portalBgInput.value = '';
