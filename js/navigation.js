@@ -25,11 +25,11 @@
   dialog.innerHTML = `
     <div class="kits-menu-head"><h2 id="kits-menu-title">KITs<span>.</span></h2>
     <button type="button" class="kits-menu-close" aria-label="メニューを閉じる">×</button></div>
-    <nav aria-label="サイトメニュー"><p class="kits-menu-label">EXPLORE / サイトをめぐる</p>
+    <nav aria-label="サイトメニュー"><h3 class="kits-menu-label">ページ一覧</h3>
     ${links.map(([href, label, description]) =>
       `<a href="${href}"${href === current ? ' aria-current="page"' : ''}><span>${label}<small>${description}</small></span><span aria-hidden="true">→</span></a>`
     ).join('')}</nav>
-    <div class="kits-shortcuts"><p class="kits-menu-label">QUICK TOOLS / ツールをすぐ開く</p>
+    <div class="kits-shortcuts"><h3 class="kits-menu-label">よく使うツール</h3>
     <div>${shortcuts.map(([href, label]) => `<a href="${href}">${label}</a>`).join('')}</div></div>`;
   document.body.append(dialog);
 
