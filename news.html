@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News | KITs (kits-tools.net)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('tools_theme');
+      if (savedTheme === 'light') document.documentElement.classList.add('light');
+    })();
+  </script>
+<link rel="stylesheet" href="css/pages.css">
+<link rel="stylesheet" href="css/navigation.css">
+</head>
+<body class="info-page"><a class="skip-link" href="#main">本文へ移動</a>  <header class="header">
+    <button class="menu-btn" aria-label="メニューを開く">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.2" fill="none">
+        <line x1="2" y1="6" x2="22" y2="6"></line>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <line x1="2" y1="18" x2="22" y2="18"></line>
+      </svg>
+    </button>
+
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Tools</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="news.html" class="nav-link active">News</a>
+      <a href="links.html" class="nav-link">Link</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle Theme">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <circle cx="12" cy="12" r="4.5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3.5"></line>
+        <line x1="12" y1="20.5" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="6" y2="6"></line>
+        <line x1="18" y1="18" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3.5" y2="12"></line>
+        <line x1="20.5" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="6" y2="18"></line>
+        <line x1="18" y1="6" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+  </header>
+<main id="main" class="page-wrap"><div class="page-label"><span>KITs / NEWS</span><span>便利なマナビを、min-naに。</span></div>
+<section class="page-hero"><p class="eyebrow">NEWS</p><h1>KITsの、<span class="accent">いま。</span></h1><p class="intro">活動のお知らせやツールの更新情報をお届けします。</p>
+</section>
+<section class="news-content"><div class="notice"><span class="notice-dot"></span><div><strong>最新のお知らせは運用中サイトで公開しています。</strong><p>以下では、運用中サイトで公開されたお知らせを一部ご紹介します。</p></div></div><a class="featured-news" href="https://www.kits-tools.net/news.html" target="_blank" rel="noopener noreferrer"><p class="eyebrow">OFFICIAL NEWS</p><h2>活動のこと。<br>これからのこと。</h2><p>合併に関するご案内や、ツールの提供状況など、<br>正式なお知らせはこちらからご確認ください。</p><span class="pill">お知らせを読む <span>↗</span></span><span class="featured-mark" aria-hidden="true">N</span></a><div class="section-top"><p class="eyebrow">ARCHIVE</p><span>公式のお知らせから</span></div>
+<div class="news-list">
+  <article><time datetime="2026-07-13">2026.07.13</time><div><span class="news-tag">団体から</span><h2>i-ventとの合併に関するお知らせ</h2><p>運用中サイトに掲載された、合併に関するご案内です。詳細は公式のお知らせをご覧ください。</p></div>
+</article>
+  <article><time datetime="2026-01-02">2026.01.02</time><div><span class="news-tag">ツール</span><h2>メモ帳と開発者ブログの提供終了</h2><p>運用中サイトで提供していたメモ帳と開発者ブログの終了が案内されました。</p></div>
+</article>
+  <article><time datetime="2025-11-27">2025.11.27</time><div><span class="news-tag">サイト</span><h2>公式のお知らせページを公開</h2><p>新しいツールやサイトの変更について、運用中サイトでご案内しています。</p></div>
+</article>
+</div>
+<a class="text-link news-source" href="https://www.kits-tools.net/news.html" target="_blank" rel="noopener noreferrer">公式のお知らせをすべて見る ↗</a>
+</section>
+<footer class="site-footer"><a class="wordmark" href="index.html">KITs<span>.</span></a><p>便利なマナビを、min-naに。</p><a href="contact.html">お問い合わせ ↗</a><span>Kaisei Information Tools</span>
+</footer>
+</main>
+<script src="js/theme.js">
+</script>
+<script src="js/navigation.js">
+</script>
+<script src="js/pages.js">
+</script>
+</body></html>
